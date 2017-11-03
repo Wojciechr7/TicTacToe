@@ -14,10 +14,10 @@ namespace TicTacToe.classes
 
 
         public Player(string s = "o", bool a = true, string n = "NO PLAYER NAME")
-        {
-            this.name = n;
+        {         
             this.Sign = s;
             this.active = a;
+            this.name = n;
         }
 
         public string Sign
