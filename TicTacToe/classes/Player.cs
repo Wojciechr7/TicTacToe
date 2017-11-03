@@ -8,5 +8,38 @@ namespace TicTacToe.classes
 {
     class Player
     {
+        public string name;
+        private string _sign;
+        private bool active;
+
+
+        public Player(string s = "o", bool a = true, string n = "NO PLAYER NAME")
+        {
+            this.name = n;
+            this.Sign = s;
+            this.active = a;
+        }
+
+        public string Sign
+        {
+            get
+            {
+                return _sign;
+            }
+            set
+            {
+                // allow only "o" and "x" property to set Sign
+                if (value == "o" || value == "x")
+                    _sign = value;
+            }
+        }
+
+        public string Turn()
+        {
+            if (this.active) return this.name;
+            return "";
+        }
+
+
     }
 }

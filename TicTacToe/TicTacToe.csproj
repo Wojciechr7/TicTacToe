@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classes\Board.cs" />
+    <Compile Include="classes\Player.cs" />
+    <Compile Include="classes\Tile.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -7,3 +7,4 @@ C:\Users\Robert\source\repos\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csproj.Gene
 C:\Users\Robert\source\repos\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csproj.CoreCompileInputs.cache
 C:\Users\Robert\source\repos\TicTacToe\TicTacToe\obj\Debug\TicTacToe.exe
 C:\Users\Robert\source\repos\TicTacToe\TicTacToe\obj\Debug\TicTacToe.pdb
+C:\Users\Robert\source\repos\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csprojResolveAssemblyReference.cache
