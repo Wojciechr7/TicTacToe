@@ -9,20 +9,30 @@ namespace TicTacToe.classes
     class Board
     {
         public bool gameStarted;
+        public string actualSign;
+        public List<Tile> tileList;
 
         public Board()
         {
             this.gameStarted = false;
+            
+
+
         }
-
-
-        public void Clear()
+        public void switchSign()
         {
-            //this.pictureBox1.Image = Properties.Resources.blank50;
-            Console.WriteLine("dsagfsdg");
-
+            this.actualSign = this.actualSign == "o" ? "x" : "o";
         }
 
-
+    
+        public void createList(List<System.Windows.Forms.PictureBox> picList)
+        {
+            this.tileList = new List<Tile>();
+            for (int i = 0; i < 9; i++) 
+            {
+                this.tileList.Add(new Tile() { Sign = "", Name = picList[i].Name, Signed = false });
+            }
+            
+        }
     }
 }

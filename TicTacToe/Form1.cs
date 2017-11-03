@@ -24,6 +24,7 @@ namespace TicTacToe
             this.createList();
             this.label2.Text = "";
             this.game = new Board();
+            this.game.createList(this.picList);
 
         }
 
@@ -42,21 +43,34 @@ namespace TicTacToe
             foreach (var c in this.picList)
                 c.Image = Properties.Resources.blank50;
 
-
-            this.label2.Text = this.player1.Turn() != "" ? this.player1.Turn() : this.player2.Turn();
+            this.updateState();
 
         }
 
         private void TileClickEvent(object sender, EventArgs e)
         {
-            if (this.game.gameStarted)
+            int actualNr = (int)Char.GetNumericValue((sender as PictureBox).Name[10]) - 1;
+            if (this.game.gameStarted && this.game.tileList[actualNr].Signed == false)
             {
-                // Console.WriteLine((sender as PictureBox).Name);
-                (sender as PictureBox).Image = Properties.Resources.x50;
+                
 
+                this.game.tileList[actualNr].Signed = true;
+                this.game.tileList[actualNr].Sign = this.game.actualSign;
+
+
+
+                (sender as PictureBox).Image = this.game.actualSign == "o" ? Properties.Resources.o50 : Properties.Resources.x50;
+                this.player1.switchTurn();
+                this.player2.switchTurn();
+                this.updateState();
+                
 
             }
-
+        }
+        private void updateState()
+        {
+            this.game.actualSign = this.player1.active == true ? this.player1.Sign : this.player2.Sign;
+            this.label2.Text = this.player1.Turn() != "" ? this.player1.Turn() : this.player2.Turn();
         }
     }
 }

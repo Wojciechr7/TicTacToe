@@ -10,7 +10,7 @@ namespace TicTacToe.classes
     {
         public string name;
         private string _sign;
-        private bool active;
+        public bool active;
 
 
         public Player(string s = "o", bool a = true, string n = "NO PLAYER NAME")
@@ -38,6 +38,11 @@ namespace TicTacToe.classes
         {
             if (this.active) return this.name;
             return "";
+        }
+
+        public void switchTurn()
+        {
+            this.active = this.active == true ? false : true;
         }
 
 

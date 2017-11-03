@@ -8,5 +8,9 @@ namespace TicTacToe.classes
 {
     class Tile
     {
+        public string Sign { get; set; }
+        public string Name { get; set; }
+        public bool Signed { get; set; }
+
     }
 }

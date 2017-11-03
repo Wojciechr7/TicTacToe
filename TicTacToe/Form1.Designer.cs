@@ -57,6 +57,7 @@ namespace TicTacToe
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureBox1.Location = new System.Drawing.Point(84, 67);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
@@ -66,6 +67,7 @@ namespace TicTacToe
             // 
             // pictureBox2
             // 
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureBox2.Location = new System.Drawing.Point(190, 67);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 100);
@@ -75,6 +77,7 @@ namespace TicTacToe
             // 
             // pictureBox3
             // 
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureBox3.Location = new System.Drawing.Point(296, 67);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(100, 100);
@@ -84,6 +87,7 @@ namespace TicTacToe
             // 
             // pictureBox4
             // 
+            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureBox4.Location = new System.Drawing.Point(84, 173);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(100, 100);
@@ -93,6 +97,7 @@ namespace TicTacToe
             // 
             // pictureBox5
             // 
+            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureBox5.Location = new System.Drawing.Point(190, 173);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(100, 100);
@@ -102,6 +107,7 @@ namespace TicTacToe
             // 
             // pictureBox6
             // 
+            this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureBox6.Location = new System.Drawing.Point(296, 173);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(100, 100);
@@ -111,6 +117,7 @@ namespace TicTacToe
             // 
             // pictureBox7
             // 
+            this.pictureBox7.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureBox7.Location = new System.Drawing.Point(84, 279);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(100, 100);
@@ -120,6 +127,7 @@ namespace TicTacToe
             // 
             // pictureBox8
             // 
+            this.pictureBox8.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureBox8.Location = new System.Drawing.Point(190, 279);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(100, 100);
@@ -129,6 +137,7 @@ namespace TicTacToe
             // 
             // pictureBox9
             // 
+            this.pictureBox9.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureBox9.Location = new System.Drawing.Point(296, 279);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(100, 100);
