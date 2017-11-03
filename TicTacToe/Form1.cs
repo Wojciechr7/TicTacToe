@@ -22,9 +22,7 @@ namespace TicTacToe
         {
             InitializeComponent();
             this.createList();
-            this.label2.Text = "";
-            this.game = new Board();
-            this.game.createList(this.picList);
+            this.label2.Text = ""; 
 
         }
 
@@ -32,6 +30,8 @@ namespace TicTacToe
         private void button1_Click(object sender, EventArgs e)
         {
             // game start field
+            this.game = new Board();
+            this.game.createList(this.picList);
             this.game.gameStarted = true;
 
             // create Player instances
@@ -47,26 +47,39 @@ namespace TicTacToe
 
         }
 
+        // event for clicking a tile
         private void TileClickEvent(object sender, EventArgs e)
         {
             int actualNr = (int)Char.GetNumericValue((sender as PictureBox).Name[10]) - 1;
             if (this.game.gameStarted && this.game.tileList[actualNr].Signed == false)
             {
-                
-
+                // update list
                 this.game.tileList[actualNr].Signed = true;
                 this.game.tileList[actualNr].Sign = this.game.actualSign;
 
 
-
+                // draw new image on a tile
                 (sender as PictureBox).Image = this.game.actualSign == "o" ? Properties.Resources.o50 : Properties.Resources.x50;
-                this.player1.switchTurn();
-                this.player2.switchTurn();
-                this.updateState();
+
+                // check if somebody win
+                if (this.game.checkWinner())
+                {
+                    MessageBox.Show(this.label2.Text + " won game!", "Winner!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    button1.PerformClick();
+                }
+                else
+                {
+                    // switches
+                    this.player1.switchTurn();
+                    this.player2.switchTurn();
+                    this.updateState();
+                }
                 
 
             }
         }
+
+        // update actual player
         private void updateState()
         {
             this.game.actualSign = this.player1.active == true ? this.player1.Sign : this.player2.Sign;

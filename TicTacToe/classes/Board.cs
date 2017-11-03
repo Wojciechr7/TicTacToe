@@ -16,8 +16,6 @@ namespace TicTacToe.classes
         {
             this.gameStarted = false;
             
-
-
         }
         public void switchSign()
         {
@@ -34,5 +32,24 @@ namespace TicTacToe.classes
             }
             
         }
+
+        public bool checkWinner()
+        {
+            // horizontal
+            if (this.tileList[0].Signed == true && this.tileList[0].Sign == this.tileList[1].Sign && this.tileList[0].Sign == this.tileList[2].Sign) return true;
+            if (this.tileList[3].Signed == true && this.tileList[3].Sign == this.tileList[4].Sign && this.tileList[3].Sign == this.tileList[5].Sign) return true;
+            if (this.tileList[6].Signed == true && this.tileList[6].Sign == this.tileList[7].Sign && this.tileList[6].Sign == this.tileList[8].Sign) return true;
+
+            // vertical
+            if (this.tileList[0].Signed == true && this.tileList[0].Sign == this.tileList[3].Sign && this.tileList[0].Sign == this.tileList[6].Sign) return true;
+            if (this.tileList[1].Signed == true && this.tileList[1].Sign == this.tileList[4].Sign && this.tileList[1].Sign == this.tileList[7].Sign) return true;
+            if (this.tileList[2].Signed == true && this.tileList[2].Sign == this.tileList[5].Sign && this.tileList[2].Sign == this.tileList[8].Sign) return true;
+
+            // diagonal
+            if (this.tileList[6].Signed == true && this.tileList[6].Sign == this.tileList[4].Sign && this.tileList[6].Sign == this.tileList[2].Sign) return true;
+            if (this.tileList[0].Signed == true && this.tileList[0].Sign == this.tileList[4].Sign && this.tileList[0].Sign == this.tileList[8].Sign) return true;
+            return false;
+        }
+
     }
 }
