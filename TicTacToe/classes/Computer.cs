@@ -14,9 +14,7 @@ namespace TicTacToe.classes
 
         public Computer(string s = "o", bool a = true, string n = "NO PLAYER NAME", bool act = false) : base(s, a, n)
         {
-            this.Sign = s;
-            this.active = a;
-            this.name = n;
+            
             this.activated = act;
         }
 

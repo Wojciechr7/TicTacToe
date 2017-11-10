@@ -3,35 +3,77 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TicTacToe.classes
 {
     class Board
     {
-        public bool gameStarted;
-        public string actualSign;
+        private bool gameStarted;
+        private string actualSign;
+        private int boardSize;
         public List<Tile> tileList;
 
-        public Board()
+
+        public Board(int bs = 9)
         {
             this.gameStarted = false;
-            
-        }
-        public void switchSign()
-        {
-            this.actualSign = this.actualSign == "o" ? "x" : "o";
+            this.boardSize = bs;
+
         }
 
-    
-        public void createList(List<System.Windows.Forms.PictureBox> picList)
+
+        public void startGame(List<PictureBox> picList)
+        {
+            this.gameStarted = true;
+
+            // set white background for all tiles
+            foreach (var c in picList)
+                c.Image = Properties.Resources.blank50;
+
+            this.createList(picList);
+        }
+
+
+        public bool isTileSigned(int actualNr)
+        {
+            if (this.gameStarted && this.tileList[actualNr].Signed == false) return true;
+            else return false;
+
+        }
+
+
+        public void updateState(Human player1, Human player2, Label label)
+        {
+            this.actualSign = player1.active == true ? "o" : "x";
+            label.Text = player1.Turn() != "" ? player1.Turn() : player2.Turn();
+        }
+
+
+        public void drawImage(PictureBox element)
+        {
+           element.Image = this.actualSign == "o" ? Properties.Resources.o50 : Properties.Resources.x50;
+        }
+
+
+
+        private void createList(List<PictureBox> picList)
         {
             this.tileList = new List<Tile>();
-            for (int i = 0; i < 9; i++) 
+            for (int i = 0; i < this.boardSize; i++) 
             {
                 this.tileList.Add(new Tile() { Sign = "", Name = picList[i].Name, Signed = false });
             }
             
         }
+
+
+        public void updateList(int actualNr)
+        {
+            this.tileList[actualNr].Signed = true;
+            this.tileList[actualNr].Sign = this.actualSign;
+        }
+
 
         public bool checkWinner()
         {

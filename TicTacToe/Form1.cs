@@ -14,40 +14,37 @@ namespace TicTacToe
 {
     public partial class Form1 : Form
     {
-        Player player1;
-        Player player2;
-        Board game;
-        Computer SI;
+        private Human player1;
+        private Human player2;
+        private Board game;
+        private Computer SI;
+        private bool started;
 
         public Form1()
         {
             InitializeComponent();
             this.createList();
             this.label2.Text = "";
+            this.started = false;
             this.SI = new Computer("x", false, this.textBox2.Text, false);
-
 
         }
 
         // start game button event
         private void button1_Click(object sender, EventArgs e)
-        {
-          
+        {          
             // game start field
-            this.game = new Board();
-            this.game.createList(this.picList);
-            this.game.gameStarted = true;
+            this.game = new Board(9);
+            this.game.startGame(this.picList);
+            this.started = true;
 
             // create Player instances
-            this.player1 = this.textBox1.Text == "" ? new Player("o", true) : new Player("o", true, this.textBox1.Text);
-            this.player2 = this.textBox2.Text == "" ? new Player("x", false) : new Player("x", false, this.textBox2.Text);
+            this.player1 = this.textBox1.Text == "" ? new Human("o", true) : new Human("o", true, this.textBox1.Text);
+            this.player2 = this.textBox2.Text == "" ? new Human("x", false) : new Human("x", false, this.textBox2.Text);
 
 
-            // set white background for all tiles
-            foreach (var c in this.picList)
-                c.Image = Properties.Resources.blank50;
+            this.game.updateState(this.player1, this.player2, this.label2);
 
-            this.updateState();
 
             this.checkBox1.Visible = true;
 
@@ -56,45 +53,42 @@ namespace TicTacToe
         // event for clicking a tile
         private void TileClickEvent(object sender, EventArgs e)
         {
-            int actualNr = (int)Char.GetNumericValue((sender as PictureBox).Name[10]) - 1;
-            int randomNumber;
-            if (this.game.gameStarted && this.game.tileList[actualNr].Signed == false)
+            if (this.started)
             {
-                // update list
-                this.game.tileList[actualNr].Signed = true;
-                this.game.tileList[actualNr].Sign = this.game.actualSign;
+                int actualNr = (int)Char.GetNumericValue((sender as PictureBox).Name[10]) - 1;
+                int randomNumber;
 
-
-                // draw new image on a tile
-                (sender as PictureBox).Image = this.game.actualSign == "o" ? Properties.Resources.o50 : Properties.Resources.x50;
-
-                // check if somebody win
-                if (this.game.checkWinner())
+                if (this.game.isTileSigned(actualNr))
                 {
-                    MessageBox.Show(this.label2.Text + " won game!", "Winner!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    button1.PerformClick();
-                }
-                else
-                {
-                    // switches
-                    this.player1.switchTurn();
-                    this.player2.switchTurn();
-                    this.updateState();
-                }
-               
-                if (this.label2.Text == "Computer")
-                {
-                    randomNumber = this.SI.chooseRandom(this.game.tileList, actualNr);
-                    if (randomNumber != -1) this.TileClickEvent(this.picList[randomNumber], null);                     
-                }
-            }           
-        }
+                    // update list
+                    this.game.updateList(actualNr);
 
-        // update actual player
-        private void updateState()
-        {
-            this.game.actualSign = this.player1.active == true ? this.player1.Sign : this.player2.Sign;
-            this.label2.Text = this.player1.Turn() != "" ? this.player1.Turn() : this.player2.Turn();
+                    // draw new image on a tile
+                    this.game.drawImage(sender as PictureBox);
+
+                    // check if somebody win
+                    if (this.game.checkWinner())
+                    {
+                        MessageBox.Show(this.label2.Text + " won game!", "Winner!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        button1.PerformClick();
+                    }
+                    else
+                    {
+                        // switches
+                        this.player1.switchTurn();
+                        this.player2.switchTurn();
+                        this.game.updateState(this.player1, this.player2, this.label2);
+                    }
+
+                    if (this.label2.Text == "Computer")
+                    {
+                        randomNumber = this.SI.chooseRandom(this.game.tileList, actualNr);
+                        if (randomNumber != -1) this.TileClickEvent(this.picList[randomNumber], null);
+                    }
+                }
+            }
+            
+
         }
 
         private void checkBox1_CheckStateChanged(object sender, EventArgs e)
