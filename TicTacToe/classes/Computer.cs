@@ -4,19 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TicTacToe.classes
 {
     class Computer : Player
     {
-        public bool activated;
+        private bool activated;
         private Random rnd = new Random();
+
+        public bool Activated { get => activated; set => activated = value; }
 
         public Computer(string s = "o", bool a = true, string n = "NO PLAYER NAME", bool act = false) : base(s, a, n)
         {
             
             this.activated = act;
         }
+
+        public void reset(string s, string n)
+        {
+            this.Sign = s;
+            this.name = n;
+
+        }
+        public void drawImage(PictureBox element)
+        {
+            element.Image = Properties.Resources.x50;
+        }
+
 
         public int chooseRandom(List<Tile> tileList,int actual)
         {

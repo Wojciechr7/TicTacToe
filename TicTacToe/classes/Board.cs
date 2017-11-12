@@ -12,8 +12,13 @@ namespace TicTacToe.classes
         private bool gameStarted;
         private string actualSign;
         private int boardSize;
-        public List<Tile> tileList;
+        private List<Tile> tileList;
 
+        //actualPlayer represents active name from TextBox: 0 - box1, 1 - box2
+        private int actualPlayer;
+
+        internal List<Tile> TileList { get => tileList; }
+        public int ActualPlayer { get => actualPlayer; set => actualPlayer = value; }
 
         public Board(int bs = 9)
         {
@@ -41,18 +46,26 @@ namespace TicTacToe.classes
             else return false;
 
         }
-
-
-        public void updateState(Human player1, Human player2, Label label)
+        public void resetPlayers(List<Human> humans, List<Computer> computers, string n1, string n2)
         {
-            this.actualSign = player1.active == true ? "o" : "x";
-            label.Text = player1.Turn() != "" ? player1.Turn() : player2.Turn();
+            this.actualPlayer = 0;
+
+            humans[0].reset("o", true, n1);
+            humans[1].reset("x", false, n2);
+            computers[0].reset("x", "Computer");
+            
+
         }
 
 
-        public void drawImage(PictureBox element)
+        public void updateState(List<Human> humans, List<Computer> computers, Label label, string actualName)
         {
-           element.Image = this.actualSign == "o" ? Properties.Resources.o50 : Properties.Resources.x50;
+
+            this.actualSign = humans[0].choosePlayerSign();
+
+
+            label.Text = actualName;
+
         }
 
 
