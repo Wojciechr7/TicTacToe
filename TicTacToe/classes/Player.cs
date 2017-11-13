@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace TicTacToe.classes
 {
-    class Player
+    class Player : IPlayer
     {
         protected string name;
         private string sign;
@@ -38,19 +38,7 @@ namespace TicTacToe.classes
 
         internal string Name { get => name; set => name = value; }
 
-        public string getActual()
-        {
-            if (this.active) return this.name;
-            return "";
-        }
-
-        public void switchTurn(string n)
-        {
-            this.active = this.active == true ? false : true;
-            this.name = n;
-        }
-        
-
+       
 
 
     }

@@ -55,14 +55,15 @@ namespace TicTacToe
 
             this.actualName = this.textBox1.Text;
 
-
+     
             this.game.resetPlayers(this.humans, this.computers, this.textBox1.Text, this.textBox2.Text);
-
-            this.game.updateState(this.humans, this.computers, this.label2, this.actualName);
+            
+            // it updates game sign and label in a bottom
+            this.game.updateState(this.label2, this.actualName, this.humans[0].Sign);
 
 
             this.checkBox1.Visible = true;
-
+            
         }
 
         // event for clicking a tile
@@ -75,59 +76,77 @@ namespace TicTacToe
 
                 if (this.game.isTileSigned(actualNr))
                 {
-                    // update list
-                    this.game.updateList(actualNr);
 
-                    
-       
-          
-
-                    // check if somebody win
-                    if (this.game.checkWinner())
-                    {
-                        MessageBox.Show(this.label2.Text + " won game!", "Winner!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                        button1.PerformClick();
-                    }
-                    else
-                    {
-                   
-                        // switch fields: turn and name
-                        this.humans[0].switchTurn(this.textBox1.Text);
-                        this.humans[1].switchTurn(this.textBox2.Text);
-
-                        this.game.ActualPlayer = this.game.ActualPlayer == 0 ? 1 : 0;
-
-                        // set actualName
-                        if (this.computers[0].Activated && this.game.ActualPlayer == 1)
+                    // human vs computer
+                    if (this.computers[0].Activated && this.game.ActualPlayer == 1)
                         {
-                            Console.WriteLine("2");
                             // computer turn
-                            this.actualName = this.computers[0].Name;
+                            this.computers[0].Name = this.textBox2.Text;
+                            
+                            this.actualName = this.humans[0].Name;
+
                             // draw new image on a tile
                             this.computers[0].drawImage(sender as PictureBox);
-
-                            randomNumber = this.computers[0].chooseRandom(this.game.TileList, actualNr);
-                            if (randomNumber != -1) this.TileClickEvent(this.picList[randomNumber], null);
-
+                            this.game.updateState(this.label2, this.actualName, this.computers[0].Sign);
+                            this.game.ActualPlayer = 0;
+                            this.game.updateList(actualNr);
+                        
+                            if (this.game.checkWinner()) this.finishGame(this.computers[0].Name);
                         }
-                        else
+                        else if (this.computers[0].Activated && this.game.ActualPlayer == 0)
                         {
-                            Console.WriteLine("1");
-                            // human turn
-                            this.actualName = this.humans[this.game.ActualPlayer].Name;
+                           // this.humans[this.game.ActualPlayer].Name = this.textBox1.Text;
+                            this.actualName = this.humans[this.game.ActualPlayer].Name = this.textBox1.Text;
+                            
                             this.humans[this.game.ActualPlayer].drawImage(sender as PictureBox);
                             
+                            this.game.updateState(this.label2, this.actualName, this.humans[0].Sign);
+                            this.game.updateList(actualNr);
+
+                            
+                            if (this.game.checkWinner()) this.finishGame(this.humans[this.game.ActualPlayer].Name);
+                            else
+                            {
+                                this.game.ActualPlayer = this.game.ActualPlayer == 0 ? 1 : 0;
+                                randomNumber = this.computers[0].chooseRandom(this.game.TileList, actualNr);
+                                if (randomNumber != -1) this.TileClickEvent(this.picList[randomNumber], null);
+                            }
+                        
                         }
 
-                 
-                         this.game.updateState(this.humans,this.computers, this.label2, this.actualName);
+                        // human vs human
+                        if (!this.computers[0].Activated)
+                        {
+                        this.humans[0].Name = this.textBox1.Text;
+                        this.humans[1].Name = this.textBox2.Text;
+                
+                        this.game.updateList(actualNr);
+                        this.humans[this.game.ActualPlayer].drawImage(sender as PictureBox);
+                        if (this.game.checkWinner()) this.finishGame(this.humans[this.game.ActualPlayer].Name);
+                        else
+                        {
+                            this.game.ActualPlayer = this.game.ActualPlayer == 0 ? 1 : 0;
+                            this.actualName = this.humans[this.game.ActualPlayer].Name; 
+                            this.game.updateState(this.label2, this.actualName, this.humans[this.game.ActualPlayer].Sign);
+                        }
+                        
+                        
+             
                     }
+                        
+
+                    
                  
                 }
             }
-           // Console.WriteLine(this.game.ActualPlayer);
+ 
             
 
+        }
+        private void finishGame(string name)
+        {
+            MessageBox.Show(name + " won game!", "Winner!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            button1.PerformClick();
         }
 
         private void checkBox1_CheckStateChanged(object sender, EventArgs e)

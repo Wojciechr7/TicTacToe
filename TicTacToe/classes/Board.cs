@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace TicTacToe.classes
 {
-    class Board
+    class Board : IBoard
     {
         private bool gameStarted;
         private string actualSign;
@@ -51,18 +51,16 @@ namespace TicTacToe.classes
             this.actualPlayer = 0;
 
             humans[0].reset("o", true, n1);
-            humans[1].reset("x", false, n2);
+            if(n2 != "Computer") humans[1].reset("x", false, n2);
+            else humans[1].reset("x", false, "Player 2");
             computers[0].reset("x", "Computer");
-            
-
         }
 
 
-        public void updateState(List<Human> humans, List<Computer> computers, Label label, string actualName)
+        public void updateState(Label label, string actualName, string sign)
         {
 
-            this.actualSign = humans[0].choosePlayerSign();
-
+            this.actualSign = sign;
 
             label.Text = actualName;
 

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace TicTacToe.classes
 {
-    class Human : Player
+    class Human : Player, IHuman
     {
         public Human(string s = "o", bool a = true, string n = "NO PLAYER NAME") : base(s, a, n)
         {
@@ -28,7 +28,7 @@ namespace TicTacToe.classes
         }
         public void drawImage(PictureBox element)
         {
-            element.Image = this.Sign != "x" ? Properties.Resources.x50 : Properties.Resources.o50;
+            element.Image = this.Sign == "x" ? Properties.Resources.x50 : Properties.Resources.o50;
         }
 
 

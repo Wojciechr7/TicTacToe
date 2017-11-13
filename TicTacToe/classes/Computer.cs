@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace TicTacToe.classes
 {
-    class Computer : Player
+    class Computer : Player, IComputer
     {
         private bool activated;
         private Random rnd = new Random();
