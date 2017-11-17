@@ -48,6 +48,10 @@
     <Compile Include="classes\Board.cs" />
     <Compile Include="classes\Computer.cs" />
     <Compile Include="classes\Human.cs" />
+    <Compile Include="models\IBoard.cs" />
+    <Compile Include="models\IComputer.cs" />
+    <Compile Include="models\IHuman.cs" />
+    <Compile Include="models\IPlayer.cs" />
     <Compile Include="classes\Player.cs" />
     <Compile Include="classes\Tile.cs" />
     <Compile Include="Form1.cs">
