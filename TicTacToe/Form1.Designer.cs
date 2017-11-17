@@ -30,7 +30,7 @@ namespace TicTacToe
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -56,15 +56,15 @@ namespace TicTacToe
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // startButton
             // 
-            this.button1.Location = new System.Drawing.Point(319, 407);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(128, 38);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "START GAME";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.startButton.Location = new System.Drawing.Point(319, 407);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(128, 38);
+            this.startButton.TabIndex = 9;
+            this.startButton.Text = "START GAME";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startGame);
             // 
             // textBox1
             // 
@@ -110,7 +110,7 @@ namespace TicTacToe
             this.pictureBox9.Size = new System.Drawing.Size(100, 100);
             this.pictureBox9.TabIndex = 8;
             this.pictureBox9.TabStop = false;
-            this.pictureBox9.Click += new System.EventHandler(this.TileClickEvent);
+            this.pictureBox9.Click += new System.EventHandler(this.tileClickEvent);
             // 
             // pictureBox8
             // 
@@ -120,7 +120,7 @@ namespace TicTacToe
             this.pictureBox8.Size = new System.Drawing.Size(100, 100);
             this.pictureBox8.TabIndex = 7;
             this.pictureBox8.TabStop = false;
-            this.pictureBox8.Click += new System.EventHandler(this.TileClickEvent);
+            this.pictureBox8.Click += new System.EventHandler(this.tileClickEvent);
             // 
             // pictureBox7
             // 
@@ -130,7 +130,7 @@ namespace TicTacToe
             this.pictureBox7.Size = new System.Drawing.Size(100, 100);
             this.pictureBox7.TabIndex = 6;
             this.pictureBox7.TabStop = false;
-            this.pictureBox7.Click += new System.EventHandler(this.TileClickEvent);
+            this.pictureBox7.Click += new System.EventHandler(this.tileClickEvent);
             // 
             // pictureBox6
             // 
@@ -140,7 +140,7 @@ namespace TicTacToe
             this.pictureBox6.Size = new System.Drawing.Size(100, 100);
             this.pictureBox6.TabIndex = 5;
             this.pictureBox6.TabStop = false;
-            this.pictureBox6.Click += new System.EventHandler(this.TileClickEvent);
+            this.pictureBox6.Click += new System.EventHandler(this.tileClickEvent);
             // 
             // pictureBox5
             // 
@@ -150,7 +150,7 @@ namespace TicTacToe
             this.pictureBox5.Size = new System.Drawing.Size(100, 100);
             this.pictureBox5.TabIndex = 4;
             this.pictureBox5.TabStop = false;
-            this.pictureBox5.Click += new System.EventHandler(this.TileClickEvent);
+            this.pictureBox5.Click += new System.EventHandler(this.tileClickEvent);
             // 
             // pictureBox4
             // 
@@ -160,7 +160,7 @@ namespace TicTacToe
             this.pictureBox4.Size = new System.Drawing.Size(100, 100);
             this.pictureBox4.TabIndex = 3;
             this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.TileClickEvent);
+            this.pictureBox4.Click += new System.EventHandler(this.tileClickEvent);
             // 
             // pictureBox3
             // 
@@ -170,7 +170,7 @@ namespace TicTacToe
             this.pictureBox3.Size = new System.Drawing.Size(100, 100);
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.TileClickEvent);
+            this.pictureBox3.Click += new System.EventHandler(this.tileClickEvent);
             // 
             // pictureBox2
             // 
@@ -180,7 +180,7 @@ namespace TicTacToe
             this.pictureBox2.Size = new System.Drawing.Size(100, 100);
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.TileClickEvent);
+            this.pictureBox2.Click += new System.EventHandler(this.tileClickEvent);
             // 
             // pictureBox1
             // 
@@ -190,7 +190,7 @@ namespace TicTacToe
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.TileClickEvent);
+            this.pictureBox1.Click += new System.EventHandler(this.tileClickEvent);
             // 
             // checkBox1
             // 
@@ -202,7 +202,7 @@ namespace TicTacToe
             this.checkBox1.Text = "Computer";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.Visible = false;
-            this.checkBox1.CheckStateChanged += new System.EventHandler(this.checkBox1_CheckStateChanged);
+            this.checkBox1.CheckStateChanged += new System.EventHandler(this.switchMode);
             // 
             // Form1
             // 
@@ -215,7 +215,7 @@ namespace TicTacToe
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.startButton);
             this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.pictureBox8);
             this.Controls.Add(this.pictureBox7);
@@ -270,7 +270,7 @@ namespace TicTacToe
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.PictureBox pictureBox9;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;

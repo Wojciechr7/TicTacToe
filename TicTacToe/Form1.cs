@@ -45,9 +45,9 @@ namespace TicTacToe
         }
 
         // start game button event
-        private void button1_Click(object sender, EventArgs e)
+        private void startGame(object sender, EventArgs e)
         {
-            if (namesValidate())
+            if (validateNames())
             {
                 // game start field
                 this.game = new Board(9);
@@ -70,9 +70,9 @@ namespace TicTacToe
         }
 
         // event for clicking a tile
-        private void TileClickEvent(object sender, EventArgs e)
+        private void tileClickEvent(object sender, EventArgs e)
         {
-            if (this.started && namesValidate())
+            if (this.started && validateNames())
             {
                 int actualNr = (int)Char.GetNumericValue((sender as PictureBox).Name[10]) - 1;
                 int randomNumber;
@@ -113,7 +113,7 @@ namespace TicTacToe
                             {
                                 this.game.ActualPlayer = this.game.ActualPlayer == 0 ? 1 : 0;
                                 randomNumber = this.computers[0].chooseRandom(this.game.TileList, actualNr);
-                                if (randomNumber != -1) this.TileClickEvent(this.picList[randomNumber], null);
+                                if (randomNumber != -1) this.tileClickEvent(this.picList[randomNumber], null);
                             }
                         
                         }
@@ -134,21 +134,11 @@ namespace TicTacToe
                             this.actualName = this.humans[this.game.ActualPlayer].Name; 
                             this.game.updateState(this.label2, this.actualName, this.humans[this.game.ActualPlayer].Sign);
                         }
-                        
-                        
-             
                     }
-                        
-
-                    
-                 
                 }
             }
- 
-            
-
         }
-        private bool namesValidate()
+        private bool validateNames()
         {
             if (textBox1.Text == textBox2.Text)
             {
@@ -160,28 +150,22 @@ namespace TicTacToe
         private void finishGame(string name)
         {
             MessageBox.Show(name + " won game!", "Winner!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            button1.PerformClick();
+            startButton.PerformClick();
         }
 
-        private void checkBox1_CheckStateChanged(object sender, EventArgs e)
+        private void switchMode(object sender, EventArgs e)
         {
             if (this.computers[0].Activated == false)
             {
-               
-                
                 this.textBox2.Text = this.computers[0].Name;
                 this.computers[0].Activated = true;
-                button1.PerformClick();
+                startButton.PerformClick();
             }
             else
             {
-                
                 this.textBox2.Text = "Player 2";
                 this.computers[0].Activated = false;
-                button1.PerformClick();
-                
-
-
+                startButton.PerformClick();
             }
         }
     }
