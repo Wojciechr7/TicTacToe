@@ -31,8 +31,8 @@ namespace TicTacToe.classes
         public override int drawImage(List<PictureBox> picList, List<Tile> tileList, int actualNr)
         {
             this.lastRandom = chooseRandom(tileList, actualNr);
-     
-            picList[lastRandom].Image = Properties.Resources.x50;
+
+            if(this.lastRandom != -1) picList[lastRandom].Image = Properties.Resources.x50;
 
             return this.lastRandom;
         }

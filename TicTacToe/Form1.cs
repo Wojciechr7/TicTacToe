@@ -20,11 +20,10 @@ namespace TicTacToe
         private Computer easyMode;
         private bool started;
         private List<Player> players;
-       // private List<Computer> computers;
         private string actualName;
         // gameMode 0 - human vs human  // 1 - human vs computer
         private int gameMode;
-        
+
 
 
         public Form1()
@@ -36,15 +35,13 @@ namespace TicTacToe
             this.createList();
 
             this.players = new List<Player>();
-           // this.computers = new List<Computer>();
-
 
             this.player1 = this.textBox1.Text == "" ? new Human("o", true) : new Human("o", true, this.textBox1.Text);
             this.player2 = this.textBox2.Text == "" ? new Human("x", false) : new Human("x", false, this.textBox2.Text);
             this.easyMode = new Computer("x", false, "Computer", false);
 
             this.createPlayersList();
-           // this.computers.Add(this.easyMode);
+
         }
 
         // start game button event
@@ -57,19 +54,21 @@ namespace TicTacToe
                 this.game.startGame(this.picList);
                 this.started = true;
 
-
-                this.actualName = this.textBox1.Text;
+                this.game.ActualPlayer = 0;
+                this.actualName = this.players[0].Name;
 
                 // TODO
                 this.game.resetPlayers(this.players, this.textBox1.Text, this.textBox2.Text);
 
+                Console.WriteLine(this.game.ActualPlayer);
+                Console.WriteLine(this.actualName);
                 // it updates game sign and label in a bottom
                 this.game.updateState(this.label2, this.actualName, this.players[0].Sign);
 
 
                 this.checkBox1.Visible = true;
             }
-            
+
         }
 
         // event for clicking a tile
@@ -82,71 +81,58 @@ namespace TicTacToe
 
                 if (this.game.isTileSigned(actualNr))
                 {
+                    this.players[0].Name = this.textBox1.Text;
+                    this.players[1].Name = this.textBox2.Text;
 
-                    // human vs computer
-                    if (this.gameMode == 1 && this.game.ActualPlayer == 1)
-                        {
-                           
-                        }
-                        else if (this.gameMode == 1 && this.game.ActualPlayer == 0)
-                        {
-                            // human turn
-                            this.actualName = this.players[this.game.ActualPlayer].Name = this.textBox1.Text;
-                            
-                            this.players[0].drawImage(this.picList, this.game.TileList, actualNr);
-                            
-                            this.game.updateState(this.label2, this.actualName, this.players[0].Sign);
-                            this.game.updateList(actualNr);
 
-                            
-                            if (this.game.checkWinner()) this.finishGame(this.players[this.game.ActualPlayer].Name);
-                            else
-                            {
-                                this.game.ActualPlayer = this.game.ActualPlayer == 0 ? 1 : 0;
-                                this.computerTurn(actualNr);
-                            }
-                        
-                        }
+                    this.players[this.game.ActualPlayer].drawImage(this.picList, this.game.TileList, actualNr);
+                    this.game.updateList(actualNr);
 
-                        // human vs human
-                        if (this.gameMode == 0)
-                        {
-                        this.players[0].Name = this.textBox1.Text;
-                        this.players[1].Name = this.textBox2.Text;
-                
-                        this.game.updateList(actualNr);
-                        players[this.game.ActualPlayer].drawImage(this.picList, this.game.TileList, actualNr);
-
-                       
-
-                        if (this.game.checkWinner()) this.finishGame(this.players[this.game.ActualPlayer].Name);
-                        else
-                        {
-                            this.game.ActualPlayer = this.game.ActualPlayer == 0 ? 1 : 0;
-                            this.actualName = this.players[this.game.ActualPlayer].Name; 
-                            this.game.updateState(this.label2, this.actualName, this.players[this.game.ActualPlayer].Sign);
-                        }
+                    if (this.game.checkWinner())
+                    {
+                        this.finishGame(this.players[this.game.ActualPlayer].Name);
                     }
+                    else if (this.gameMode == 1)
+                    {
+                        this.computerTurn(actualNr);
+                    }
+
+                    if (this.gameMode == 0) this.game.ActualPlayer = this.game.ActualPlayer == 0 ? 1 : 0;
+                    this.actualName = this.players[this.game.ActualPlayer].Name;
+                    this.game.updateState(this.label2, this.actualName, this.players[this.game.ActualPlayer].Sign);
+
+
+                    
+
+                  
                 }
             }
         }
+
         private void computerTurn(int actualNr)
         {
-            // computer turn
-            this.players[1].Name = this.textBox2.Text;
+            this.players[2].Name = this.textBox2.Text;
 
             this.actualName = this.players[0].Name;
 
-            // draw new image on a tile
             actualNr = this.players[2].drawImage(this.picList, this.game.TileList, actualNr);
-            this.game.updateState(this.label2, this.actualName, this.players[2].Sign);
-            this.game.updateList(actualNr);
 
-           
-            this.game.ActualPlayer = 0;
+            if (actualNr == -1) finishGame("Nobody");
+            else
+            {
 
-   
-            if (this.game.checkWinner()) this.finishGame(this.players[2].Name);
+                this.game.updateState(this.label2, this.actualName, this.players[2].Sign);
+                this.game.updateList(actualNr);
+
+
+                this.game.ActualPlayer = 0;
+
+
+                if (this.game.checkWinner())
+                {
+                    this.finishGame(this.players[2].Name);
+                }
+            }
         }
         private bool validateNames()
         {

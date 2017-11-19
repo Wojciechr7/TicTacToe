@@ -51,10 +51,12 @@ namespace TicTacToe.classes
             this.actualPlayer = 0;
             
             // TODO
+            /*
             players[0].reset("o", true, n1);
             if(n2 != "Computer") players[1].reset("x", false, n2);
             else players[1].reset("x", false, "Player 2");
             players[2].reset("x", false, "Computer");
+            */
             
         }
 
