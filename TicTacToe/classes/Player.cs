@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace TicTacToe.classes
 {
-    class Player : IPlayer
+    abstract class Player : IPlayer
     {
         protected string name;
         private string sign;
@@ -38,7 +38,9 @@ namespace TicTacToe.classes
 
         internal string Name { get => name; set => name = value; }
 
-       
+        public abstract int drawImage(List<PictureBox> picList, List<Tile> tileList, int actualNr);
+        public abstract void reset(string s, bool a, string n);
+
 
 
     }

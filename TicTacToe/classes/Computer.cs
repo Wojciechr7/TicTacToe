@@ -8,10 +8,11 @@ using System.Windows.Forms;
 
 namespace TicTacToe.classes
 {
-    class Computer : Player, IComputer
+    class Computer : Player
     {
         private bool activated;
         private Random rnd = new Random();
+        private int lastRandom;
 
         public bool Activated { get => activated; set => activated = value; }
 
@@ -21,15 +22,19 @@ namespace TicTacToe.classes
             this.activated = act;
         }
 
-        public void reset(string s, string n)
+        public override void reset(string s, bool a, string n)
         {
             this.Sign = s;
             this.name = n;
 
         }
-        public void drawImage(PictureBox element)
+        public override int drawImage(List<PictureBox> picList, List<Tile> tileList, int actualNr)
         {
-            element.Image = Properties.Resources.x50;
+            this.lastRandom = chooseRandom(tileList, actualNr);
+     
+            picList[lastRandom].Image = Properties.Resources.x50;
+
+            return this.lastRandom;
         }
 
 
