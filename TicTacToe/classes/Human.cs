@@ -11,7 +11,7 @@ namespace TicTacToe.classes
     {
         public Human(string s = "o", bool a = true, string n = "NO PLAYER NAME") : base(s, a, n)
         {
-            
+
         }
 
         public string choosePlayerSign()
@@ -26,12 +26,17 @@ namespace TicTacToe.classes
             this.name = n;
 
         }
-        public override int drawImage(List<PictureBox> picList, List<Tile> tileList, int actualNr)
+        public override int drawImage(List<PictureBox> picList, List<List<Tile>> tileList, int[] actualIndex)
         {
-            picList[actualNr].Image = this.Sign == "x" ? Properties.Resources.x50 : Properties.Resources.o50;
+            int actualPicNumber = tileList[actualIndex[0]][actualIndex[1]].Nr;
 
-            return actualNr;
+            picList[actualPicNumber].Image = this.Sign == "x" ? Properties.Resources.x50 : Properties.Resources.o50;
+
+
+            return actualPicNumber;
         }
+
+
 
 
     }

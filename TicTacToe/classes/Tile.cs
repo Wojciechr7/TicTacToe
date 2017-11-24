@@ -11,6 +11,6 @@ namespace TicTacToe.classes
         public string Sign { get; set; }
         public string Name { get; set; }
         public bool Signed { get; set; }
-
+        public int Nr { get; set; }
     }
 }

@@ -12,13 +12,16 @@ namespace TicTacToe.classes
         private bool gameStarted;
         private string actualSign;
         private int boardSize;
-        private List<Tile> tileList;
+        private List<List<Tile>> tileList;
 
-        //actualPlayer represents active name from TextBox: 0 - box1, 1 - box2
+
+        //actualPlayer: 0 - player 1 / 1 - player 2
         private int actualPlayer;
 
-        internal List<Tile> TileList { get => tileList; }
+        internal List<List<Tile>> TileList { get => tileList; }
+
         public int ActualPlayer { get => actualPlayer; set => actualPlayer = value; }
+
 
         public Board(int bs = 9)
         {
@@ -40,58 +43,65 @@ namespace TicTacToe.classes
         }
 
 
-        public bool isTileSigned(int actualNr)
+        public bool isTileSigned(int[] actualIndex)
         {
-            if (this.gameStarted && this.tileList[actualNr].Signed == false) return true;
+
+            if (this.gameStarted && this.tileList[actualIndex[0]][actualIndex[1]].Signed == false)
+            {
+                return true;
+            }
             else return false;
 
-        }
-        public void resetPlayers(List<Player> players, string n1, string n2)
-        {
-            this.actualPlayer = 0;
-            
-            // TODO
-            /*
-            players[0].reset("o", true, n1);
-            if(n2 != "Computer") players[1].reset("x", false, n2);
-            else players[1].reset("x", false, "Player 2");
-            players[2].reset("x", false, "Computer");
-            */
-            
-        }
 
+        }
 
         public void updateState(Label label, string actualName, string sign)
         {
-
             this.actualSign = sign;
-
             label.Text = actualName;
-
         }
 
 
 
         private void createList(List<PictureBox> picList)
         {
-            this.tileList = new List<Tile>();
-            for (int i = 0; i < this.boardSize; i++) 
+            this.tileList = new List<List<Tile>>();
+
+            int index = 0;
+            for (int i = 0; i < 3; i++)
             {
-                this.tileList.Add(new Tile() { Sign = "", Name = picList[i].Name, Signed = false });
+                this.tileList.Add(new List<Tile>());
+                for (int j = 0; j < 3; j++)
+                {
+                    picList[index].Tag = new int[2] { i, j };
+                    this.tileList[i].Add(new Tile() { Sign = "", Name = picList[index].Name, Signed = false, Nr = index++ });
+
+                }
             }
-            
+
+
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    //  Console.WriteLine(this.tileList[i][j].Name);
+
+                }
+            }
         }
 
 
-        public void updateList(int actualNr)
+        public void updateList(int[] actualIndex)
         {
-            this.tileList[actualNr].Signed = true;
-            this.tileList[actualNr].Sign = this.actualSign;
+            this.tileList[actualIndex[0]][actualIndex[1]].Signed = true;
+            this.tileList[actualIndex[0]][actualIndex[1]].Sign = this.actualSign;
         }
 
 
         public bool checkWinner()
         {
+            /*
             // horizontal
             if (this.tileList[0].Signed == true && this.tileList[0].Sign == this.tileList[1].Sign && this.tileList[0].Sign == this.tileList[2].Sign) return true;
             if (this.tileList[3].Signed == true && this.tileList[3].Sign == this.tileList[4].Sign && this.tileList[3].Sign == this.tileList[5].Sign) return true;
@@ -105,6 +115,66 @@ namespace TicTacToe.classes
             // diagonal
             if (this.tileList[6].Signed == true && this.tileList[6].Sign == this.tileList[4].Sign && this.tileList[6].Sign == this.tileList[2].Sign) return true;
             if (this.tileList[0].Signed == true && this.tileList[0].Sign == this.tileList[4].Sign && this.tileList[0].Sign == this.tileList[8].Sign) return true;
+            */
+            return false;
+
+
+        }
+        public bool checkWinner2(int[] index)
+        {
+            // win checker idea inspired by:
+            // https://stackoverflow.com/questions/1056316/algorithm-for-determining-tic-tac-toe-game-over
+
+            int n = 3;
+
+            for (int i = 0; i < n; i++)
+            {
+                if (!this.tileList[index[0]][i].Signed || this.tileList[index[0]][i].Sign != this.actualSign)
+                    break;
+                if (i == n - 1)
+                {
+                    // horizontal win
+                }
+            }
+
+
+            for (int i = 0; i < n; i++)
+            {
+                if (!this.tileList[i][index[1]].Signed || this.tileList[i][index[1]].Sign != this.actualSign)
+                    break;
+                if (i == n - 1)
+                {
+                    // vertical win
+                }
+            }
+            if (index[0] == index[1])
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    if (!this.tileList[i][i].Signed || this.tileList[i][i].Sign != this.actualSign)
+                        break;
+                    if (i == n - 1)
+                    {
+                        // diagonal win
+                    }
+                }
+            }
+
+            if (index[0] + index[1] == n - 1)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    if (!this.tileList[i][(n - 1) - i].Signed || this.tileList[i][(n - 1) - i].Sign != this.actualSign)
+                        break;
+                    if (i == n - 1)
+                    {
+                        // anti-daigonal win
+                    }
+                }
+            }
+
+
+
             return false;
         }
 

@@ -28,9 +28,9 @@ namespace TicTacToe.classes
             this.name = n;
 
         }
-        public override int drawImage(List<PictureBox> picList, List<Tile> tileList, int actualNr)
+        public override int drawImage(List<PictureBox> picList, List<List<Tile>> tileList, int[] actualIndex)
         {
-            this.lastRandom = chooseRandom(tileList, actualNr);
+            this.lastRandom = chooseRandom(tileList, actualIndex);
 
             if(this.lastRandom != -1) picList[lastRandom].Image = Properties.Resources.x50;
 
@@ -38,21 +38,26 @@ namespace TicTacToe.classes
         }
 
 
-        public int chooseRandom(List<Tile> tileList,int actual)
+        public int chooseRandom(List<List<Tile>> tileList,int[] actual)
         {
            
             bool emptyTile = false;
             int[] array = new int[9];
             int index = 0;
-            foreach (var item in tileList)
-            {
+            foreach (var row in tileList)
+                foreach (var item in row)
+                {
                 
                 if (item.Signed == false)
                 {
                     array[index] = 1;
                     emptyTile = true;
                 }else array[index] = 0;
+
+                    Console.WriteLine(array[index]);
                 index++;
+                
+                    
             }
             
             int rand()
