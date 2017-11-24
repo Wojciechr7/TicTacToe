@@ -85,7 +85,7 @@ namespace TicTacToe.classes
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    //  Console.WriteLine(this.tileList[i][j].Name);
+                    //  Console.WriteLine(this.tileList[i][j].Signed);
 
                 }
             }
@@ -99,28 +99,7 @@ namespace TicTacToe.classes
         }
 
 
-        public bool checkWinner()
-        {
-            /*
-            // horizontal
-            if (this.tileList[0].Signed == true && this.tileList[0].Sign == this.tileList[1].Sign && this.tileList[0].Sign == this.tileList[2].Sign) return true;
-            if (this.tileList[3].Signed == true && this.tileList[3].Sign == this.tileList[4].Sign && this.tileList[3].Sign == this.tileList[5].Sign) return true;
-            if (this.tileList[6].Signed == true && this.tileList[6].Sign == this.tileList[7].Sign && this.tileList[6].Sign == this.tileList[8].Sign) return true;
-
-            // vertical
-            if (this.tileList[0].Signed == true && this.tileList[0].Sign == this.tileList[3].Sign && this.tileList[0].Sign == this.tileList[6].Sign) return true;
-            if (this.tileList[1].Signed == true && this.tileList[1].Sign == this.tileList[4].Sign && this.tileList[1].Sign == this.tileList[7].Sign) return true;
-            if (this.tileList[2].Signed == true && this.tileList[2].Sign == this.tileList[5].Sign && this.tileList[2].Sign == this.tileList[8].Sign) return true;
-
-            // diagonal
-            if (this.tileList[6].Signed == true && this.tileList[6].Sign == this.tileList[4].Sign && this.tileList[6].Sign == this.tileList[2].Sign) return true;
-            if (this.tileList[0].Signed == true && this.tileList[0].Sign == this.tileList[4].Sign && this.tileList[0].Sign == this.tileList[8].Sign) return true;
-            */
-            return false;
-
-
-        }
-        public bool checkWinner2(int[] index)
+        public bool checkWinner(int[] index)
         {
             // win checker idea inspired by:
             // https://stackoverflow.com/questions/1056316/algorithm-for-determining-tic-tac-toe-game-over
@@ -134,6 +113,7 @@ namespace TicTacToe.classes
                 if (i == n - 1)
                 {
                     // horizontal win
+                    return true;
                 }
             }
 
@@ -145,6 +125,7 @@ namespace TicTacToe.classes
                 if (i == n - 1)
                 {
                     // vertical win
+                    return true;
                 }
             }
             if (index[0] == index[1])
@@ -156,6 +137,7 @@ namespace TicTacToe.classes
                     if (i == n - 1)
                     {
                         // diagonal win
+                        return true;
                     }
                 }
             }
@@ -169,6 +151,7 @@ namespace TicTacToe.classes
                     if (i == n - 1)
                     {
                         // anti-daigonal win
+                        return true;
                     }
                 }
             }
@@ -176,7 +159,8 @@ namespace TicTacToe.classes
 
 
             return false;
-        }
 
+
+        }
     }
 }

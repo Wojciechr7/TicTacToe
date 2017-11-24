@@ -78,7 +78,7 @@ namespace TicTacToe
                     this.players[this.game.ActualPlayer].drawImage(this.picList, this.game.TileList, actualIndex);
                     this.game.updateList(actualIndex);
 
-                    if (this.game.checkWinner2(actualIndex))
+                    if (this.game.checkWinner(actualIndex))
                     {
                         this.finishGame(this.players[this.game.ActualPlayer].Name);
                     }
@@ -111,12 +111,13 @@ namespace TicTacToe
                 this.game.updateState(this.label2, this.players[2].Name, this.players[2].Sign);
                 this.game.updateList(actualIndex);
 
-                this.game.updateState(this.label2, this.players[this.game.ActualPlayer].Name, this.players[this.game.ActualPlayer].Sign);
+               // this.game.updateState(this.label2, this.players[this.game.ActualPlayer].Name, this.players[this.game.ActualPlayer].Sign);
 
-                if (this.game.checkWinner())
+                if (this.game.checkWinner(actualIndex))
                 {
                     this.finishGame(this.players[2].Name);
                 }
+                this.game.updateState(this.label2, this.players[this.game.ActualPlayer].Name, this.players[this.game.ActualPlayer].Sign);
             }
             
 

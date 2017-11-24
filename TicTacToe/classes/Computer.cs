@@ -18,7 +18,7 @@ namespace TicTacToe.classes
 
         public Computer(string s = "o", bool a = true, string n = "NO PLAYER NAME", bool act = false) : base(s, a, n)
         {
-            
+
             this.activated = act;
         }
 
@@ -32,45 +32,47 @@ namespace TicTacToe.classes
         {
             this.lastRandom = chooseRandom(tileList, actualIndex);
 
-            if(this.lastRandom != -1) picList[lastRandom].Image = Properties.Resources.x50;
+            if (this.lastRandom != -1) picList[lastRandom].Image = Properties.Resources.x50;
 
             return this.lastRandom;
         }
 
 
-        public int chooseRandom(List<List<Tile>> tileList,int[] actual)
+        public int chooseRandom(List<List<Tile>> tileList, int[] actual)
         {
-           
+
             bool emptyTile = false;
             int[] array = new int[9];
             int index = 0;
             foreach (var row in tileList)
                 foreach (var item in row)
                 {
-                
-                if (item.Signed == false)
-                {
-                    array[index] = 1;
-                    emptyTile = true;
-                }else array[index] = 0;
 
-                    Console.WriteLine(array[index]);
-                index++;
-                
-                    
-            }
-            
+                    if (item.Signed == false)
+                    {
+                        array[index] = 1;
+                        emptyTile = true;
+                    }
+                    else array[index] = 0;
+
+                    //  Console.WriteLine(array[index]);
+                    index++;
+
+
+                }
+
             int rand()
             {
                 if (emptyTile)
                 {
-                    
+
                     int nr = rnd.Next(0, 9);
                     if (array[nr] == 1) return nr;
                     else return rand();
 
-                }else return -1;
-                
+                }
+                else return -1;
+
             }
 
             return rand();
