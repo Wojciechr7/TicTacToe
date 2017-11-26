@@ -29,7 +29,6 @@ namespace TicTacToe.classes
         public override int drawImage(List<PictureBox> picList, List<List<Tile>> tileList, int[] actualIndex)
         {
             int actualPicNumber = tileList[actualIndex[0]][actualIndex[1]].Nr;
-
             picList[actualPicNumber].Image = this.Sign == "x" ? Properties.Resources.x50 : Properties.Resources.o50;
 
 

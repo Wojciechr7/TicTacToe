@@ -38,20 +38,20 @@ namespace TicTacToe
             this.x3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mODEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.humanVsComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.humanVsHumanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.humanVsComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(342, 39);
+            this.startButton.Location = new System.Drawing.Point(344, 29);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(128, 38);
             this.startButton.TabIndex = 9;
-            this.startButton.Text = "START GAME";
+            this.startButton.Text = "RESET";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startGame);
             // 
@@ -98,29 +98,25 @@ namespace TicTacToe
             this.x3ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.x3ToolStripMenuItem.Name = "x3ToolStripMenuItem";
             this.x3ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.x3ToolStripMenuItem.Tag = "500";
             this.x3ToolStripMenuItem.Text = "3x3";
+            this.x3ToolStripMenuItem.Click += new System.EventHandler(this.switchGameSize);
             // 
             // x4ToolStripMenuItem
             // 
             this.x4ToolStripMenuItem.Name = "x4ToolStripMenuItem";
             this.x4ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.x4ToolStripMenuItem.Tag = "606";
             this.x4ToolStripMenuItem.Text = "4x4";
+            this.x4ToolStripMenuItem.Click += new System.EventHandler(this.switchGameSize);
             // 
             // x5ToolStripMenuItem
             // 
             this.x5ToolStripMenuItem.Name = "x5ToolStripMenuItem";
             this.x5ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.x5ToolStripMenuItem.Tag = "712";
             this.x5ToolStripMenuItem.Text = "5x5";
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gRAToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(484, 24);
-            this.menuStrip1.TabIndex = 15;
-            this.menuStrip1.Text = "menuStrip1";
+            this.x5ToolStripMenuItem.Click += new System.EventHandler(this.switchGameSize);
             // 
             // mODEToolStripMenuItem
             // 
@@ -131,14 +127,6 @@ namespace TicTacToe
             this.mODEToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.mODEToolStripMenuItem.Text = "MODE";
             // 
-            // humanVsComputerToolStripMenuItem
-            // 
-            this.humanVsComputerToolStripMenuItem.Name = "humanVsComputerToolStripMenuItem";
-            this.humanVsComputerToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.humanVsComputerToolStripMenuItem.Tag = "comp";
-            this.humanVsComputerToolStripMenuItem.Text = "Human vs Computer";
-            this.humanVsComputerToolStripMenuItem.Click += new System.EventHandler(this.switchMode);
-            // 
             // humanVsHumanToolStripMenuItem
             // 
             this.humanVsHumanToolStripMenuItem.Checked = true;
@@ -148,6 +136,24 @@ namespace TicTacToe
             this.humanVsHumanToolStripMenuItem.Tag = "human";
             this.humanVsHumanToolStripMenuItem.Text = "Human vs Human";
             this.humanVsHumanToolStripMenuItem.Click += new System.EventHandler(this.switchMode);
+            // 
+            // humanVsComputerToolStripMenuItem
+            // 
+            this.humanVsComputerToolStripMenuItem.Name = "humanVsComputerToolStripMenuItem";
+            this.humanVsComputerToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.humanVsComputerToolStripMenuItem.Tag = "comp";
+            this.humanVsComputerToolStripMenuItem.Text = "Human vs Computer";
+            this.humanVsComputerToolStripMenuItem.Click += new System.EventHandler(this.switchMode);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gRAToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(484, 24);
+            this.menuStrip1.TabIndex = 15;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // Form1
             // 

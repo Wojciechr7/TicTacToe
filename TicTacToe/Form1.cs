@@ -50,7 +50,7 @@ namespace TicTacToe
             if (validateNames())
             {
                 // game start field
-                this.game = new Board(this.boardSize^2);
+                this.game = new Board((int)Math.Pow(this.boardSize, 2));
                 this.game.startGame(this.picList);
                 this.started = true;
 
@@ -74,10 +74,11 @@ namespace TicTacToe
 
                 int[] actualIndex = (int[])(sender as PictureBox).Tag;
 
+
                 if (this.game.isTileSigned(actualIndex))
                 {
                     this.players[0].Name = this.textBox1.Text;
-                    
+
 
                     this.players[this.game.ActualPlayer].drawImage(this.picList, this.game.TileList, actualIndex);
                     this.game.updateList(actualIndex);
@@ -105,7 +106,7 @@ namespace TicTacToe
         {
             this.players[2].Name = this.textBox2.Text;
 
-           int randomNumber = this.players[2].drawImage(this.picList, this.game.TileList, actualIndex);
+            int randomNumber = this.players[2].drawImage(this.picList, this.game.TileList, actualIndex);
 
             if (randomNumber == -1) finishGame("Nobody");
             else
@@ -121,7 +122,7 @@ namespace TicTacToe
                 }
                 this.game.updateState(this, this.players[this.game.ActualPlayer].Name, this.players[this.game.ActualPlayer].Sign);
             }
-            
+
 
         }
         private bool validateNames()
@@ -173,14 +174,18 @@ namespace TicTacToe
 
         private void createPicList(int bs)
         {
-            for(int i = 0; i < Math.Pow(bs, 2); i++)
+            if (this.picList.Count > 1)
+                foreach (var item in this.picList)
+                    item.Dispose();
+
+            this.picList.Clear();
+            for (int i = 0; i < Math.Pow(bs, 2); i++)
             {
                 this.picList.Add(new PictureBox());
                 ((ISupportInitialize)(this.picList[i])).BeginInit();
                 int space = 106;
-                
                 this.picList[i].Cursor = Cursors.Cross;
-                this.picList[i].Name = "pictureBox" + (i+1);
+                //this.picList[i].Name = "pictureBox" + (i+1);
                 this.picList[i].Size = new Size(100, 100);
                 this.picList[i].TabIndex = 8;
                 this.picList[i].TabStop = false;
@@ -192,12 +197,32 @@ namespace TicTacToe
                 }
                 else
                 {
-                    this.picList[i].Location = new Point(this.picList[i-1].Location.X + space, this.picList[i-1].Location.Y);
+                    this.picList[i].Location = new Point(this.picList[i - 1].Location.X + space, this.picList[i - 1].Location.Y);
                 }
                 this.Controls.Add(this.picList[i]);
 
-                ((ISupportInitialize)(this.picList[i])).EndInit();               
+                ((ISupportInitialize)(this.picList[i])).EndInit();
             }
+        }
+
+        private void switchGameSize(object sender, EventArgs e)
+        {
+            this.boardSize = (int)Char.GetNumericValue((sender as ToolStripMenuItem).Name[1]);
+
+            this.x5ToolStripMenuItem.CheckState = CheckState.Unchecked;
+            this.x4ToolStripMenuItem.CheckState = CheckState.Unchecked;
+            this.x3ToolStripMenuItem.CheckState = CheckState.Unchecked;
+
+            (sender as ToolStripMenuItem).CheckState = CheckState.Checked;
+
+            int windowSize = Convert.ToInt32((sender as ToolStripMenuItem).Tag);
+
+            this.MinimumSize = new Size(windowSize, windowSize);
+            this.MaximumSize = new Size(windowSize, windowSize);
+
+            this.createPicList(this.boardSize);
+            startButton.PerformClick();
+
         }
     }
 }

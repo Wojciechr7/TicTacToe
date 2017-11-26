@@ -27,7 +27,6 @@ namespace TicTacToe.classes
         {
             this.gameStarted = false;
             this.boardSize = bs;
-
         }
 
 
@@ -66,12 +65,11 @@ namespace TicTacToe.classes
         private void createList(List<PictureBox> picList)
         {
             this.tileList = new List<List<Tile>>();
-
             int index = 0;
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < Math.Sqrt(this.boardSize); i++)
             {
                 this.tileList.Add(new List<Tile>());
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < Math.Sqrt(this.boardSize); j++)
                 {
                     picList[index].Tag = new int[2] { i, j };
                     this.tileList[i].Add(new Tile() { Sign = "", Name = picList[index].Name, Signed = false, Nr = index++ });
@@ -81,11 +79,11 @@ namespace TicTacToe.classes
 
 
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < Math.Sqrt(this.boardSize); i++)
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < Math.Sqrt(this.boardSize); j++)
                 {
-                    //  Console.WriteLine(this.tileList[i][j].Signed);
+                    //  Console.WriteLine(this.tileList[i][j].Name);
 
                 }
             }
@@ -104,7 +102,7 @@ namespace TicTacToe.classes
             // win checker idea inspired by:
             // https://stackoverflow.com/questions/1056316/algorithm-for-determining-tic-tac-toe-game-over
 
-            int n = 3;
+            int n = (int)Math.Sqrt(boardSize);
 
             for (int i = 0; i < n; i++)
             {

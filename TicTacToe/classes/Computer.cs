@@ -42,7 +42,7 @@ namespace TicTacToe.classes
         {
 
             bool emptyTile = false;
-            int[] array = new int[9];
+            int[] array = new int[(int)Math.Pow(tileList.Count(), 2)];
             int index = 0;
             foreach (var row in tileList)
                 foreach (var item in row)
@@ -66,7 +66,7 @@ namespace TicTacToe.classes
                 if (emptyTile)
                 {
 
-                    int nr = rnd.Next(0, 9);
+                    int nr = rnd.Next(0, (int)Math.Pow(tileList.Count(), 2));
                     if (array[nr] == 1) return nr;
                     else return rand();
 
