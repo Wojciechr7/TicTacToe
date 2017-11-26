@@ -55,10 +55,10 @@ namespace TicTacToe.classes
 
         }
 
-        public void updateState(Label label, string actualName, string sign)
+        public void updateState(Form label, string actualName, string sign)
         {
             this.actualSign = sign;
-            label.Text = actualName;
+            label.Text = "TicTacToe (actual player: " + actualName + ")";
         }
 
 

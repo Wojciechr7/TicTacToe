@@ -30,7 +30,6 @@ namespace TicTacToe
         {
 
             InitializeComponent();
-            this.label2.Text = "";
             this.started = false;
             this.gameMode = 0;
 
@@ -60,10 +59,8 @@ namespace TicTacToe
 
 
                 // it updates game sign and label in a bottom
-                this.game.updateState(this.label2, this.actualName, this.players[0].Sign);
+                this.game.updateState(this, this.actualName, this.players[0].Sign);
 
-
-                this.checkBox1.Visible = true;
             }
 
         }
@@ -98,7 +95,7 @@ namespace TicTacToe
                         this.players[1].Name = this.textBox2.Text;
                         if (this.gameMode == 0) this.game.ActualPlayer = this.game.ActualPlayer == 0 ? 1 : 0;
                         this.actualName = this.players[this.game.ActualPlayer].Name;
-                        this.game.updateState(this.label2, this.actualName, this.players[this.game.ActualPlayer].Sign);
+                        this.game.updateState(this, this.actualName, this.players[this.game.ActualPlayer].Sign);
                     }
                 }
             }
@@ -115,14 +112,14 @@ namespace TicTacToe
             {
                 actualIndex = (int[])this.picList[randomNumber].Tag;
 
-                this.game.updateState(this.label2, this.players[2].Name, this.players[2].Sign);
+                this.game.updateState(this, this.players[2].Name, this.players[2].Sign);
                 this.game.updateList(actualIndex);
 
                 if (this.game.checkWinner(actualIndex))
                 {
                     this.finishGame(this.players[2].Name);
                 }
-                this.game.updateState(this.label2, this.players[this.game.ActualPlayer].Name, this.players[this.game.ActualPlayer].Sign);
+                this.game.updateState(this, this.players[this.game.ActualPlayer].Name, this.players[this.game.ActualPlayer].Sign);
             }
             
 
@@ -151,11 +148,13 @@ namespace TicTacToe
 
         private void switchMode(object sender, EventArgs e)
         {
-            if (this.gameMode == 0)
+            if ((string)(sender as ToolStripMenuItem).Tag == "comp")
             {
                 this.textBox2.Text = "Computer";
                 this.createPlayersList();
                 this.gameMode = 1;
+                this.humanVsComputerToolStripMenuItem.CheckState = CheckState.Checked;
+                this.humanVsHumanToolStripMenuItem.CheckState = CheckState.Unchecked;
 
                 startButton.PerformClick();
             }
@@ -164,6 +163,8 @@ namespace TicTacToe
                 this.textBox2.Text = "Player 2";
                 this.createPlayersList();
                 this.gameMode = 0;
+                this.humanVsComputerToolStripMenuItem.CheckState = CheckState.Unchecked;
+                this.humanVsHumanToolStripMenuItem.CheckState = CheckState.Checked;
 
                 startButton.PerformClick();
             }
@@ -184,7 +185,7 @@ namespace TicTacToe
                 this.picList[i].TabIndex = 8;
                 this.picList[i].TabStop = false;
                 this.picList[i].Click += new EventHandler(this.tileClickEvent);
-                if (i == 0) this.picList[i].Location = new Point(84, 67);
+                if (i == 0) this.picList[i].Location = new Point(84, 97);
                 else if (i % bs == 0 && i < Math.Pow(bs, 2))
                 {
                     this.picList[i].Location = new Point(this.picList[0].Location.X, this.picList[i - 1].Location.Y + space);
