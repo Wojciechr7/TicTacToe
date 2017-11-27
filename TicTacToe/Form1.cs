@@ -14,7 +14,8 @@ namespace TicTacToe
 {
     public partial class Form1 : Form
     {
-        private Board game;
+        private Board board;
+        private Game game;
         private bool started;
         private List<Player> players;
         private string actualName;
@@ -50,16 +51,18 @@ namespace TicTacToe
             if (ValidateNames())
             {
                 // game start field
-                this.game = new Board((int)Math.Pow(this.boardSize, 2));
-                this.game.StartGame(this.picList);
+                this.board = new Board(this.boardSize);
+                this.game = new Game(this.boardSize);
+
+                this.game.StartGame(this.picList, this.board);
                 this.started = true;
 
-                this.game.ActualPlayer = 0;
+                this.board.ActualPlayer = 0;
                 this.actualName = this.players[0].Name;
 
 
                 // it updates game sign and label in a bottom
-                this.game.UpdateState(this, this.actualName, this.players[0].Sign);
+                this.board.UpdateState(this, this.actualName, this.players[0].Sign);
 
             }
 
@@ -75,18 +78,19 @@ namespace TicTacToe
                 int[] actualIndex = (int[])(sender as PictureBox).Tag;
 
 
-                if (this.game.IsTileSigned(actualIndex))
+                if (this.board.IsTileSigned(actualIndex))
                 {
                     this.players[0].Name = this.textBox1.Text;
 
 
-                    this.players[this.game.ActualPlayer].DrawImage(this.picList, this.game.TileList, actualIndex);
-                    this.game.UpdateList(actualIndex);
+                    this.players[this.board.ActualPlayer].DrawImage(this.picList, this.board.TileList, actualIndex);
+                    this.game.UpdateList(actualIndex, this.board.TileList, this.board.ActualSign);
 
-                    if (this.game.CheckWinner(actualIndex))
+                    if (this.game.CheckWinner(actualIndex, this.board.TileList, this.board.ActualSign))
                     {
-                        this.FinishGame(this.players[this.game.ActualPlayer].Name);
+                        this.FinishGame(this.players[this.board.ActualPlayer].Name);
                     }
+                    else if (this.board.IsBoardFull()) FinishGame("Nobody");
                     else if (this.gameMode == 1)
                     {
                         this.ComputerTurn(actualIndex);
@@ -94,9 +98,9 @@ namespace TicTacToe
                     else
                     {
                         this.players[1].Name = this.textBox2.Text;
-                        if (this.gameMode == 0) this.game.ActualPlayer = this.game.ActualPlayer == 0 ? 1 : 0;
-                        this.actualName = this.players[this.game.ActualPlayer].Name;
-                        this.game.UpdateState(this, this.actualName, this.players[this.game.ActualPlayer].Sign);
+                        if (this.gameMode == 0) this.board.ActualPlayer = this.board.ActualPlayer == 0 ? 1 : 0;
+                        this.actualName = this.players[this.board.ActualPlayer].Name;
+                        this.board.UpdateState(this, this.actualName, this.players[this.board.ActualPlayer].Sign);
                     }
                 }
             }
@@ -106,23 +110,22 @@ namespace TicTacToe
         {
             this.players[2].Name = this.textBox2.Text;
 
-            int randomNumber = this.players[2].DrawImage(this.picList, this.game.TileList, actualIndex);
+            // random number will not be needed
+            int randomNumber = this.players[2].DrawImage(this.picList, this.board.TileList, actualIndex);
 
-            // TODO
-            if (randomNumber == -1) FinishGame("Nobody");
-            else
+           
+            actualIndex = (int[])this.picList[randomNumber].Tag;
+
+            this.board.UpdateState(this, this.players[2].Name, this.players[2].Sign);
+            this.game.UpdateList(actualIndex, this.board.TileList, this.board.ActualSign);
+
+            if (this.game.CheckWinner(actualIndex, this.board.TileList, this.board.ActualSign))
             {
-                actualIndex = (int[])this.picList[randomNumber].Tag;
+                this.FinishGame(this.players[2].Name);
+            } else if (this.board.IsBoardFull()) FinishGame("Nobody");
 
-                this.game.UpdateState(this, this.players[2].Name, this.players[2].Sign);
-                this.game.UpdateList(actualIndex);
+            this.board.UpdateState(this, this.players[this.board.ActualPlayer].Name, this.players[this.board.ActualPlayer].Sign);
 
-                if (this.game.CheckWinner(actualIndex))
-                {
-                    this.FinishGame(this.players[2].Name);
-                }
-                this.game.UpdateState(this, this.players[this.game.ActualPlayer].Name, this.players[this.game.ActualPlayer].Sign);
-            }
 
 
         }

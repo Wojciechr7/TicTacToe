@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Classes\Board.cs" />
     <Compile Include="Classes\Computer.cs" />
+    <Compile Include="Classes\Game.cs" />
     <Compile Include="Classes\Human.cs" />
     <Compile Include="Interfaces\IBoard.cs" />
     <Compile Include="Interfaces\IComputer.cs" />
