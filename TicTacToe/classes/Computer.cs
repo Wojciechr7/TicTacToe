@@ -22,15 +22,15 @@ namespace TicTacToe.classes
             this.activated = act;
         }
 
-        public override void reset(string s, bool a, string n)
+        public override void Reset(string s, bool a, string n)
         {
             this.Sign = s;
             this.name = n;
 
         }
-        public override int drawImage(List<PictureBox> picList, List<List<Tile>> tileList, int[] actualIndex)
+        public override int DrawImage(List<PictureBox> picList, List<List<Tile>> tileList, int[] actualIndex)
         {
-            this.lastRandom = chooseRandom(tileList, actualIndex);
+            this.lastRandom = ChooseRandom(tileList, actualIndex);
 
             if (this.lastRandom != -1) picList[lastRandom].Image = Properties.Resources.x50;
 
@@ -38,7 +38,7 @@ namespace TicTacToe.classes
         }
 
 
-        public int chooseRandom(List<List<Tile>> tileList, int[] actual)
+        public int ChooseRandom(List<List<Tile>> tileList, int[] actual)
         {
 
             bool emptyTile = false;

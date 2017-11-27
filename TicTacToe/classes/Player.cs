@@ -38,8 +38,8 @@ namespace TicTacToe.classes
 
         internal string Name { get => name; set => name = value; }
 
-        public abstract int drawImage(List<PictureBox> picList, List<List<Tile>> tileList, int[] actualIndex);
-        public abstract void reset(string s, bool a, string n);
+        public abstract int DrawImage(List<PictureBox> picList, List<List<Tile>> tileList, int[] actualIndex);
+        public abstract void Reset(string s, bool a, string n);
 
 
 

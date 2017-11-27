@@ -53,7 +53,7 @@ namespace TicTacToe
             this.startButton.TabIndex = 9;
             this.startButton.Text = "RESET";
             this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startGame);
+            this.startButton.Click += new System.EventHandler(this.StartGame);
             // 
             // textBox1
             // 
@@ -100,7 +100,7 @@ namespace TicTacToe
             this.x3ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.x3ToolStripMenuItem.Tag = "500";
             this.x3ToolStripMenuItem.Text = "3x3";
-            this.x3ToolStripMenuItem.Click += new System.EventHandler(this.switchGameSize);
+            this.x3ToolStripMenuItem.Click += new System.EventHandler(this.SwitchGameSize);
             // 
             // x4ToolStripMenuItem
             // 
@@ -108,7 +108,7 @@ namespace TicTacToe
             this.x4ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.x4ToolStripMenuItem.Tag = "606";
             this.x4ToolStripMenuItem.Text = "4x4";
-            this.x4ToolStripMenuItem.Click += new System.EventHandler(this.switchGameSize);
+            this.x4ToolStripMenuItem.Click += new System.EventHandler(this.SwitchGameSize);
             // 
             // x5ToolStripMenuItem
             // 
@@ -116,7 +116,7 @@ namespace TicTacToe
             this.x5ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.x5ToolStripMenuItem.Tag = "712";
             this.x5ToolStripMenuItem.Text = "5x5";
-            this.x5ToolStripMenuItem.Click += new System.EventHandler(this.switchGameSize);
+            this.x5ToolStripMenuItem.Click += new System.EventHandler(this.SwitchGameSize);
             // 
             // mODEToolStripMenuItem
             // 
@@ -135,7 +135,7 @@ namespace TicTacToe
             this.humanVsHumanToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.humanVsHumanToolStripMenuItem.Tag = "human";
             this.humanVsHumanToolStripMenuItem.Text = "Human vs Human";
-            this.humanVsHumanToolStripMenuItem.Click += new System.EventHandler(this.switchMode);
+            this.humanVsHumanToolStripMenuItem.Click += new System.EventHandler(this.SwitchMode);
             // 
             // humanVsComputerToolStripMenuItem
             // 
@@ -143,7 +143,7 @@ namespace TicTacToe
             this.humanVsComputerToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.humanVsComputerToolStripMenuItem.Tag = "comp";
             this.humanVsComputerToolStripMenuItem.Text = "Human vs Computer";
-            this.humanVsComputerToolStripMenuItem.Click += new System.EventHandler(this.switchMode);
+            this.humanVsComputerToolStripMenuItem.Click += new System.EventHandler(this.SwitchMode);
             // 
             // menuStrip1
             // 

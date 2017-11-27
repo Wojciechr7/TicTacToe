@@ -36,22 +36,22 @@ namespace TicTacToe
             this.boardSize = 3;
 
 
-            this.createPicList(this.boardSize);
+            this.CreatePicList(this.boardSize);
 
             this.players = new List<Player>();
 
-            this.createPlayersList();
+            this.CreatePlayersList();
 
         }
 
         // start game button event
-        private void startGame(object sender, EventArgs e)
+        private void StartGame(object sender, EventArgs e)
         {
-            if (validateNames())
+            if (ValidateNames())
             {
                 // game start field
                 this.game = new Board((int)Math.Pow(this.boardSize, 2));
-                this.game.startGame(this.picList);
+                this.game.StartGame(this.picList);
                 this.started = true;
 
                 this.game.ActualPlayer = 0;
@@ -59,73 +59,74 @@ namespace TicTacToe
 
 
                 // it updates game sign and label in a bottom
-                this.game.updateState(this, this.actualName, this.players[0].Sign);
+                this.game.UpdateState(this, this.actualName, this.players[0].Sign);
 
             }
 
         }
 
         // event for clicking a tile
-        private void tileClickEvent(object sender, EventArgs e)
+        private void TileClickEvent(object sender, EventArgs e)
         {
-            if (this.started && validateNames())
+            if (this.started && ValidateNames())
             {
 
 
                 int[] actualIndex = (int[])(sender as PictureBox).Tag;
 
 
-                if (this.game.isTileSigned(actualIndex))
+                if (this.game.IsTileSigned(actualIndex))
                 {
                     this.players[0].Name = this.textBox1.Text;
 
 
-                    this.players[this.game.ActualPlayer].drawImage(this.picList, this.game.TileList, actualIndex);
-                    this.game.updateList(actualIndex);
+                    this.players[this.game.ActualPlayer].DrawImage(this.picList, this.game.TileList, actualIndex);
+                    this.game.UpdateList(actualIndex);
 
-                    if (this.game.checkWinner(actualIndex))
+                    if (this.game.CheckWinner(actualIndex))
                     {
-                        this.finishGame(this.players[this.game.ActualPlayer].Name);
+                        this.FinishGame(this.players[this.game.ActualPlayer].Name);
                     }
                     else if (this.gameMode == 1)
                     {
-                        this.computerTurn(actualIndex);
+                        this.ComputerTurn(actualIndex);
                     }
                     else
                     {
                         this.players[1].Name = this.textBox2.Text;
                         if (this.gameMode == 0) this.game.ActualPlayer = this.game.ActualPlayer == 0 ? 1 : 0;
                         this.actualName = this.players[this.game.ActualPlayer].Name;
-                        this.game.updateState(this, this.actualName, this.players[this.game.ActualPlayer].Sign);
+                        this.game.UpdateState(this, this.actualName, this.players[this.game.ActualPlayer].Sign);
                     }
                 }
             }
         }
 
-        private void computerTurn(int[] actualIndex)
+        private void ComputerTurn(int[] actualIndex)
         {
             this.players[2].Name = this.textBox2.Text;
 
-            int randomNumber = this.players[2].drawImage(this.picList, this.game.TileList, actualIndex);
+            int randomNumber = this.players[2].DrawImage(this.picList, this.game.TileList, actualIndex);
 
-            if (randomNumber == -1) finishGame("Nobody");
+            // TODO
+            if (randomNumber == -1) FinishGame("Nobody");
             else
             {
                 actualIndex = (int[])this.picList[randomNumber].Tag;
 
-                this.game.updateState(this, this.players[2].Name, this.players[2].Sign);
-                this.game.updateList(actualIndex);
+                this.game.UpdateState(this, this.players[2].Name, this.players[2].Sign);
+                this.game.UpdateList(actualIndex);
 
-                if (this.game.checkWinner(actualIndex))
+                if (this.game.CheckWinner(actualIndex))
                 {
-                    this.finishGame(this.players[2].Name);
+                    this.FinishGame(this.players[2].Name);
                 }
-                this.game.updateState(this, this.players[this.game.ActualPlayer].Name, this.players[this.game.ActualPlayer].Sign);
+                this.game.UpdateState(this, this.players[this.game.ActualPlayer].Name, this.players[this.game.ActualPlayer].Sign);
             }
 
 
         }
-        private bool validateNames()
+        private bool ValidateNames()
         {
             if (textBox1.Text == textBox2.Text)
             {
@@ -134,12 +135,12 @@ namespace TicTacToe
             }
             else return true;
         }
-        private void finishGame(string name)
+        private void FinishGame(string name)
         {
             MessageBox.Show(name + " won game!", "Winner!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             startButton.PerformClick();
         }
-        private void createPlayersList()
+        private void CreatePlayersList()
         {
             this.players.Clear();
             this.players.Add(this.textBox1.Text == "" ? new Human("o", true) : new Human("o", true, this.textBox1.Text));
@@ -147,12 +148,12 @@ namespace TicTacToe
             this.players.Add(new Computer("x", false, "Computer", false));
         }
 
-        private void switchMode(object sender, EventArgs e)
+        private void SwitchMode(object sender, EventArgs e)
         {
             if ((string)(sender as ToolStripMenuItem).Tag == "comp")
             {
                 this.textBox2.Text = "Computer";
-                this.createPlayersList();
+                this.CreatePlayersList();
                 this.gameMode = 1;
                 this.humanVsComputerToolStripMenuItem.CheckState = CheckState.Checked;
                 this.humanVsHumanToolStripMenuItem.CheckState = CheckState.Unchecked;
@@ -162,7 +163,7 @@ namespace TicTacToe
             else
             {
                 this.textBox2.Text = "Player 2";
-                this.createPlayersList();
+                this.CreatePlayersList();
                 this.gameMode = 0;
                 this.humanVsComputerToolStripMenuItem.CheckState = CheckState.Unchecked;
                 this.humanVsHumanToolStripMenuItem.CheckState = CheckState.Checked;
@@ -172,7 +173,7 @@ namespace TicTacToe
         }
 
 
-        private void createPicList(int bs)
+        private void CreatePicList(int bs)
         {
             if (this.picList.Count > 1)
                 foreach (var item in this.picList)
@@ -189,7 +190,7 @@ namespace TicTacToe
                 this.picList[i].Size = new Size(100, 100);
                 this.picList[i].TabIndex = 8;
                 this.picList[i].TabStop = false;
-                this.picList[i].Click += new EventHandler(this.tileClickEvent);
+                this.picList[i].Click += new EventHandler(this.TileClickEvent);
                 if (i == 0) this.picList[i].Location = new Point(84, 97);
                 else if (i % bs == 0 && i < Math.Pow(bs, 2))
                 {
@@ -205,7 +206,7 @@ namespace TicTacToe
             }
         }
 
-        private void switchGameSize(object sender, EventArgs e)
+        private void SwitchGameSize(object sender, EventArgs e)
         {
             this.boardSize = (int)Char.GetNumericValue((sender as ToolStripMenuItem).Name[1]);
 
@@ -220,7 +221,7 @@ namespace TicTacToe
             this.MinimumSize = new Size(windowSize, windowSize);
             this.MaximumSize = new Size(windowSize, windowSize);
 
-            this.createPicList(this.boardSize);
+            this.CreatePicList(this.boardSize);
             startButton.PerformClick();
 
         }

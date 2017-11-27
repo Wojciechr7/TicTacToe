@@ -30,7 +30,7 @@ namespace TicTacToe.classes
         }
 
 
-        public void startGame(List<PictureBox> picList)
+        public void StartGame(List<PictureBox> picList)
         {
             this.gameStarted = true;
 
@@ -38,11 +38,11 @@ namespace TicTacToe.classes
             foreach (var c in picList)
                 c.Image = Properties.Resources.blank50;
 
-            this.createList(picList);
+            this.CreateList(picList);
         }
 
 
-        public bool isTileSigned(int[] actualIndex)
+        public bool IsTileSigned(int[] actualIndex)
         {
 
             if (this.gameStarted && this.tileList[actualIndex[0]][actualIndex[1]].Signed == false)
@@ -54,7 +54,7 @@ namespace TicTacToe.classes
 
         }
 
-        public void updateState(Form label, string actualName, string sign)
+        public void UpdateState(Form label, string actualName, string sign)
         {
             this.actualSign = sign;
             label.Text = "TicTacToe (actual player: " + actualName + ")";
@@ -62,7 +62,7 @@ namespace TicTacToe.classes
 
 
 
-        private void createList(List<PictureBox> picList)
+        private void CreateList(List<PictureBox> picList)
         {
             this.tileList = new List<List<Tile>>();
             int index = 0;
@@ -90,31 +90,33 @@ namespace TicTacToe.classes
         }
 
 
-        public void updateList(int[] actualIndex)
+        public void UpdateList(int[] actualIndex)
         {
             this.tileList[actualIndex[0]][actualIndex[1]].Signed = true;
             this.tileList[actualIndex[0]][actualIndex[1]].Sign = this.actualSign;
         }
 
 
-        public bool checkWinner(int[] index)
+        public bool CheckWinner(int[] index)
         {
             // win checker idea inspired by:
             // https://stackoverflow.com/questions/1056316/algorithm-for-determining-tic-tac-toe-game-over
 
+            // n - number of squares in a row to check
             int n = (int)Math.Sqrt(boardSize);
 
             for (int i = 0; i < n; i++)
             {
+                // break when one of the squares in a row is actually marked by the opponents Sign
                 if (!this.tileList[index[0]][i].Signed || this.tileList[index[0]][i].Sign != this.actualSign)
                     break;
+                // return true if loop was not broken
                 if (i == n - 1)
                 {
-                    // horizontal win
+                    // winner found: horizontal
                     return true;
                 }
             }
-
 
             for (int i = 0; i < n; i++)
             {
@@ -122,10 +124,11 @@ namespace TicTacToe.classes
                     break;
                 if (i == n - 1)
                 {
-                    // vertical win
+                    // winner found: vertical
                     return true;
                 }
             }
+
             if (index[0] == index[1])
             {
                 for (int i = 0; i < n; i++)
@@ -134,7 +137,7 @@ namespace TicTacToe.classes
                         break;
                     if (i == n - 1)
                     {
-                        // diagonal win
+                        // winner found: diagonal
                         return true;
                     }
                 }
@@ -148,17 +151,12 @@ namespace TicTacToe.classes
                         break;
                     if (i == n - 1)
                     {
-                        // anti-daigonal win
+                        // // winner found: anti-diagonal
                         return true;
                     }
                 }
             }
-
-
-
             return false;
-
-
         }
     }
 }
