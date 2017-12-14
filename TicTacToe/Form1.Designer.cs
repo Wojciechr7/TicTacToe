@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace TicTacToe
 {
@@ -89,7 +90,7 @@ namespace TicTacToe
             this.x4ToolStripMenuItem,
             this.x5ToolStripMenuItem});
             this.rOZMIARToolStripMenuItem.Name = "rOZMIARToolStripMenuItem";
-            this.rOZMIARToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rOZMIARToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.rOZMIARToolStripMenuItem.Text = "SIZE";
             // 
             // x3ToolStripMenuItem
@@ -97,7 +98,7 @@ namespace TicTacToe
             this.x3ToolStripMenuItem.Checked = true;
             this.x3ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.x3ToolStripMenuItem.Name = "x3ToolStripMenuItem";
-            this.x3ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.x3ToolStripMenuItem.Size = new System.Drawing.Size(91, 22);
             this.x3ToolStripMenuItem.Tag = "500";
             this.x3ToolStripMenuItem.Text = "3x3";
             this.x3ToolStripMenuItem.Click += new System.EventHandler(this.SwitchGameSize);
@@ -105,7 +106,7 @@ namespace TicTacToe
             // x4ToolStripMenuItem
             // 
             this.x4ToolStripMenuItem.Name = "x4ToolStripMenuItem";
-            this.x4ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.x4ToolStripMenuItem.Size = new System.Drawing.Size(91, 22);
             this.x4ToolStripMenuItem.Tag = "606";
             this.x4ToolStripMenuItem.Text = "4x4";
             this.x4ToolStripMenuItem.Click += new System.EventHandler(this.SwitchGameSize);
@@ -113,7 +114,7 @@ namespace TicTacToe
             // x5ToolStripMenuItem
             // 
             this.x5ToolStripMenuItem.Name = "x5ToolStripMenuItem";
-            this.x5ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.x5ToolStripMenuItem.Size = new System.Drawing.Size(91, 22);
             this.x5ToolStripMenuItem.Tag = "712";
             this.x5ToolStripMenuItem.Text = "5x5";
             this.x5ToolStripMenuItem.Click += new System.EventHandler(this.SwitchGameSize);
@@ -124,7 +125,7 @@ namespace TicTacToe
             this.humanVsHumanToolStripMenuItem,
             this.humanVsComputerToolStripMenuItem});
             this.mODEToolStripMenuItem.Name = "mODEToolStripMenuItem";
-            this.mODEToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.mODEToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.mODEToolStripMenuItem.Text = "MODE";
             // 
             // humanVsHumanToolStripMenuItem
@@ -184,8 +185,6 @@ namespace TicTacToe
         
         
         private System.Windows.Forms.Button startButton;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ToolStripMenuItem gRAToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rOZMIARToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem x3ToolStripMenuItem;
@@ -195,6 +194,8 @@ namespace TicTacToe
         private System.Windows.Forms.ToolStripMenuItem mODEToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem humanVsHumanToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem humanVsComputerToolStripMenuItem;
+        public System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 
