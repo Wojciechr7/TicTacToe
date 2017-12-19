@@ -142,23 +142,21 @@ namespace TicTacToe
         {
             if ((string)(sender as ToolStripMenuItem).Tag == "comp")
             {
+                startButton.PerformClick();
                 this.textBox2.Text = "Computer";
                 this.game.CreatePlayersList(this.textBox1, this.textBox2);
                 this.gameMode = 1;
                 this.humanVsComputerToolStripMenuItem.CheckState = CheckState.Checked;
                 this.humanVsHumanToolStripMenuItem.CheckState = CheckState.Unchecked;
-
-                startButton.PerformClick();
             }
             else
             {
+                startButton.PerformClick();
                 this.textBox2.Text = "Player 2";
                 this.game.CreatePlayersList(this.textBox1, this.textBox2);
                 this.gameMode = 0;
                 this.humanVsComputerToolStripMenuItem.CheckState = CheckState.Unchecked;
                 this.humanVsHumanToolStripMenuItem.CheckState = CheckState.Checked;
-
-                startButton.PerformClick();
             }
         }
 

@@ -69,7 +69,6 @@ namespace TicTacToe.classes
             int n = this.rowSize;
 
 
-            //moze to porozbijac na klays
             for (int i = 0; i < n; i++)
             {
                 // break when one of the squares in a row is actually marked by the opponents Sign

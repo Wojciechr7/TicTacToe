@@ -40,7 +40,6 @@ namespace TicTacToe.classes
 
         public int ChooseRandom(List<List<Tile>> tileList, int[] actual)
         {
-
             bool emptyTile = false;
             int[] array = new int[(int)Math.Pow(tileList.Count(), 2)];
             int index = 0;
@@ -54,12 +53,118 @@ namespace TicTacToe.classes
                         emptyTile = true;
                     }
                     else array[index] = 0;
-
-                    //  Console.WriteLine(array[index]);
                     index++;
-
-
                 }
+            int hard()
+            {
+
+
+                for (int i = 0; i < tileList.Count; i++)
+                {
+                    int counter = 0;
+                    for (int j = 0; j < tileList.Count; j++)
+                    {
+                        if (tileList[i][j].Signed && tileList[i][j].Sign == "o")
+                            counter++;
+
+                        if (tileList[i][j].Sign == "x") break;
+
+                        if (counter == 2)
+                        {
+                            for (int k = 0; k < 3; k++)
+                            {
+                                if (!tileList[i][k].Signed)
+                                {
+                                    return tileList[i][k].Nr;
+                                }
+                            }
+                            break;
+                        }
+
+                    }
+                }
+
+
+                for (int i = 0; i < tileList.Count; i++)
+                {
+                    int counter = 0;
+                    for (int j = 0; j < tileList.Count; j++)
+                    {
+                        if (tileList[j][i].Signed && tileList[j][i].Sign == "o")
+                            counter++;
+
+                        if (tileList[j][i].Sign == "x") break;
+
+                        if (counter == 2)
+                        {
+                            for (int k = 0; k < 3; k++)
+                            {
+                                if (!tileList[k][i].Signed)
+                                {
+                                    return tileList[k][i].Nr;
+                                }
+                            }
+                            break;
+                        }
+
+                    }
+                }
+
+                int counterDiag = 0;
+                for (int i = 0; i < tileList.Count; i++)
+                {
+                    
+            
+                    if (tileList[i][i].Signed && tileList[i][i].Sign == "o")
+                        counterDiag++;
+
+                        if (tileList[i][i].Sign == "x") break;
+
+                        if (counterDiag == 2)
+                        {
+                        
+                        for (int k = 0; k < 3; k++)
+                            {
+                                if (!tileList[k][k].Signed)
+                                {
+                                    return tileList[k][k].Nr;
+  
+                                }
+                            }
+                            break;
+                        }
+                }
+
+                int counterAntiDiag = 0;
+                for (int i = 0; i < tileList.Count; i++)
+                {
+
+
+                    if (tileList[i][(tileList.Count - 1) - i].Signed && tileList[i][(tileList.Count - 1) - i].Sign == "o")
+                        counterAntiDiag++;
+
+                    if (tileList[i][(tileList.Count - 1) - i].Sign == "x") break;
+
+                    if (counterAntiDiag == 2)
+                    {
+                        for (int k = 0; k < 3; k++)
+                        {
+                            if (!tileList[k][(tileList.Count - 1) - k].Signed)
+                            {
+                                return tileList[k][(tileList.Count - 1) - k].Nr;
+                            }
+                        }
+                        break;
+                    }
+                }
+
+
+
+
+
+                return rand();
+
+            }
 
             int rand()
             {
@@ -75,7 +180,10 @@ namespace TicTacToe.classes
 
             }
 
-            return rand();
+            return hard();
         }
+
+
+   
     }
 }
