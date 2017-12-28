@@ -8,10 +8,10 @@ using System.Windows.Forms;
 
 namespace TicTacToe.classes
 {
-    class Computer : Player
+    abstract class Computer : Player, IComputer
     {
         private bool activated;
-        private Random rnd = new Random();
+        private Random rnd;
         private int lastRandom;
 
         public bool Activated { get => activated; set => activated = value; }
@@ -20,6 +20,7 @@ namespace TicTacToe.classes
         {
 
             this.activated = act;
+            this.rnd = new Random();
         }
 
         public override void Reset(string s, bool a, string n)
@@ -30,17 +31,19 @@ namespace TicTacToe.classes
         }
         public override int DrawImage(List<PictureBox> picList, List<List<Tile>> tileList, int[] actualIndex)
         {
-            this.lastRandom = ChooseRandom(tileList, actualIndex);
+            this.lastRandom = ChooseTile(tileList);
 
             if (this.lastRandom != -1) picList[lastRandom].Image = Properties.Resources.x50;
 
             return this.lastRandom;
         }
 
+        public abstract int ChooseTile(List<List<Tile>> tileList);
 
-        public int ChooseRandom(List<List<Tile>> tileList, int[] actual)
+
+        
+        protected int Rand(List<List<Tile>> tileList)
         {
-           
             bool emptyTile = false;
             int[] array = new int[(int)Math.Pow(tileList.Count(), 2)];
             int index = 0;
@@ -56,233 +59,119 @@ namespace TicTacToe.classes
                     else array[index] = 0;
                     index++;
                 }
-            int hard()
+
+            if (emptyTile)
             {
-                int winningTile = canWin();
+                // find random empty tile
+                int nr = rnd.Next(0, (int)Math.Pow(tileList.Count(), 2));
+                if (array[nr] == 1) return nr;
+                else return Rand(tileList);
 
-                if (winningTile != -1) return winningTile;
-
-                for (int i = 0; i < tileList.Count; i++)
-                {
-                    int counterHorizontal = 0;
-                    for (int j = 0; j < tileList.Count; j++)
-                    {
-                        // increase counter when human sign found in one line
-                        if (tileList[i][j].Signed && tileList[i][j].Sign == "o")
-                            counterHorizontal++;
-
-                        // break when line is marked by computer
-                        if (tileList[i][j].Sign == "x") break;
-
-                        // 2 human signs found in one line
-                        if (counterHorizontal == 2)
-                        {
-                            for (int k = 0; k < 3; k++)
-                            {
-                                // find first empty tile
-                                if (!tileList[i][k].Signed)
-                                {
-                                    // return number of tile to block horizontal line
-                                    return tileList[i][k].Nr;
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-
-
-                for (int i = 0; i < tileList.Count; i++)
-                {
-                    int counterVertical = 0;
-                    for (int j = 0; j < tileList.Count; j++)
-                    {
-                        if (tileList[j][i].Signed && tileList[j][i].Sign == "o")
-                            counterVertical++;
-
-                        if (tileList[j][i].Sign == "x") break;
-
-                        if (counterVertical == 2)
-                        {
-                            for (int k = 0; k < 3; k++)
-                            {
-                                if (!tileList[k][i].Signed)
-                                {
-                                    // block vertical line
-                                    return tileList[k][i].Nr;
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-
-                int counterDiag = 0;
-                for (int i = 0; i < tileList.Count; i++)
-                {
-                    if (tileList[i][i].Signed && tileList[i][i].Sign == "o")
-                        counterDiag++;
-
-                    if (tileList[i][i].Sign == "x") break;
-
-                    if (counterDiag == 2)
-                    {
-
-                        for (int k = 0; k < 3; k++)
-                        {
-                            if (!tileList[k][k].Signed)
-                            {
-                                // block diagonal line
-                                return tileList[k][k].Nr;
-                            }
-                        }
-                        break;
-                    }
-                }
-
-
-                int counterAntiDiag = 0;
-                for (int i = 0; i < tileList.Count; i++)
-                {
-                    if (tileList[i][(tileList.Count - 1) - i].Signed && tileList[i][(tileList.Count - 1) - i].Sign == "o")
-                        counterAntiDiag++;
-
-                    if (tileList[i][(tileList.Count - 1) - i].Sign == "x") break;
-
-                    if (counterAntiDiag == 2)
-                    {
-                        for (int k = 0; k < 3; k++)
-                        {
-                            if (!tileList[k][(tileList.Count - 1) - k].Signed)
-                            {
-                                // block anti-diagonal line
-                                return tileList[k][(tileList.Count - 1) - k].Nr;
-                            }
-                        }
-                        break;
-                    }
-                }
-
-
-                return rand();
             }
-            int canWin()
+            else return -1;
+        }
+
+
+        protected int CanWin(List<List<Tile>> tileList)
+        {
+
+            for (int i = 0; i < tileList.Count; i++)
             {
-                
-                 for (int i = 0; i < tileList.Count; i++)
-                  {
-                    int horizontalCounter = 0;
-                    for (int j = 0; j < tileList.Count; j++)
-                    {
-                        if (tileList[i][j].Signed && tileList[i][j].Sign == "x")
-                            horizontalCounter++;
-
-                        if (tileList[i][j].Sign == "o") break;
-
-                        if (horizontalCounter == tileList.Count - 1)
-                        {
-                            for (int k = 0; k < 3; k++)
-                            {
-                                if (!tileList[i][k].Signed)
-                                {
-                                    // horizontal winning tile
-                                    return tileList[i][k].Nr;
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-
-
-                for (int i = 0; i < tileList.Count; i++)
-                {
-                    int verticalCounter = 0;
-                    for (int j = 0; j < tileList.Count; j++)
-                    {
-                        if (tileList[j][i].Signed && tileList[j][i].Sign == "x")
-                            verticalCounter++;
-
-                        if (tileList[j][i].Sign == "o") break;
-
-                        if (verticalCounter == tileList.Count - 1)
-                        {
-                            for (int k = 0; k < 3; k++)
-                            {
-                                if (!tileList[k][i].Signed)
-                                {
-                                    // vertical winning tile
-                                    return tileList[k][i].Nr;
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-                
-
-                int diagonalCounter = 0;
+                int horizontalCounter = 0;
                 for (int j = 0; j < tileList.Count; j++)
                 {
-                    if (tileList[j][j].Signed && tileList[j][j].Sign == "x")
-                        diagonalCounter++;
+                    if (tileList[i][j].Signed && tileList[i][j].Sign == "x")
+                        horizontalCounter++;
 
-                    if (tileList[j][j].Sign == "o") break;
+                    if (tileList[i][j].Sign == "o") break;
 
-                    if (diagonalCounter == tileList.Count - 1)
+                    if (horizontalCounter == tileList.Count - 1)
                     {
                         for (int k = 0; k < 3; k++)
                         {
-                            if (!tileList[k][k].Signed)
+                            if (!tileList[i][k].Signed)
                             {
-                                // diagonal winning tile
-                                return tileList[k][k].Nr;
+                                // horizontal winning tile
+                                return tileList[i][k].Nr;
                             }
                         }
                         break;
                     }
                 }
-                
-                int antiDiagonalCounter = 0;
+            }
+
+
+            for (int i = 0; i < tileList.Count; i++)
+            {
+                int verticalCounter = 0;
                 for (int j = 0; j < tileList.Count; j++)
                 {
-                    if (tileList[j][(tileList.Count - 1) - j].Signed && tileList[j][(tileList.Count - 1) - j].Sign == "x")
-                        antiDiagonalCounter++;
+                    if (tileList[j][i].Signed && tileList[j][i].Sign == "x")
+                        verticalCounter++;
 
-                    if (tileList[j][(tileList.Count - 1) - j].Sign == "o") break;
+                    if (tileList[j][i].Sign == "o") break;
 
-                    if (antiDiagonalCounter == tileList.Count - 1)
+                    if (verticalCounter == tileList.Count - 1)
                     {
                         for (int k = 0; k < 3; k++)
                         {
-                            if (!tileList[k][(tileList.Count - 1) - k].Signed)
+                            if (!tileList[k][i].Signed)
                             {
-                                // anti-diagonal winning tile
-                                return tileList[k][(tileList.Count - 1) - k].Nr;
+                                // vertical winning tile
+                                return tileList[k][i].Nr;
                             }
                         }
                         break;
                     }
                 }
-
-                return -1;
             }
 
-            int rand()
+
+            int diagonalCounter = 0;
+            for (int j = 0; j < tileList.Count; j++)
             {
-                if (emptyTile)
+                if (tileList[j][j].Signed && tileList[j][j].Sign == "x")
+                    diagonalCounter++;
+
+                if (tileList[j][j].Sign == "o") break;
+
+                if (diagonalCounter == tileList.Count - 1)
                 {
-                    // find random empty tile
-                    int nr = rnd.Next(0, (int)Math.Pow(tileList.Count(), 2));
-                    if (array[nr] == 1) return nr;
-                    else return rand();
-
+                    for (int k = 0; k < 3; k++)
+                    {
+                        if (!tileList[k][k].Signed)
+                        {
+                            // diagonal winning tile
+                            return tileList[k][k].Nr;
+                        }
+                    }
+                    break;
                 }
-                else return -1;
-
             }
 
-            return hard();
+            int antiDiagonalCounter = 0;
+            for (int j = 0; j < tileList.Count; j++)
+            {
+                if (tileList[j][(tileList.Count - 1) - j].Signed && tileList[j][(tileList.Count - 1) - j].Sign == "x")
+                    antiDiagonalCounter++;
+
+                if (tileList[j][(tileList.Count - 1) - j].Sign == "o") break;
+
+                if (antiDiagonalCounter == tileList.Count - 1)
+                {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        if (!tileList[k][(tileList.Count - 1) - k].Signed)
+                        {
+                            // anti-diagonal winning tile
+                            return tileList[k][(tileList.Count - 1) - k].Nr;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            return -1;
         }
 
 

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace TicTacToe.classes
 {
-    class Board
+    class Board : IBoard
     {
         private string actualSign;
         private int rowSize;
@@ -16,17 +16,22 @@ namespace TicTacToe.classes
 
 
         internal List<List<Tile>> TileList { get => tileList; }
-        public int ActualPlayer { get => actualPlayer; set => actualPlayer = value; }
+        public int ActualPlayer
+        {
+            get => actualPlayer;
+            set
+            {
+                if (value == 0 || value == 1)
+                    actualPlayer = value;
+                else throw new ArgumentOutOfRangeException("actualPlayer value should be 0 or 1");
+            }
+        }
         public string ActualSign { get => actualSign; set => actualSign = value; }
 
 
 
         //actualPlayer: 0 - player 1 / 1 - player 2
         private int actualPlayer;
-
-        
-
-        
 
         public Board(int rs = 3)
         {
@@ -62,17 +67,6 @@ namespace TicTacToe.classes
                 {
                     picList[index].Tag = new int[2] { i, j };
                     this.tileList[i].Add(new Tile() { Sign = "", Name = picList[index].Name, Signed = false, Nr = index++ });
-
-                }
-            }
-
-
-
-            for (int i = 0; i < this.rowSize; i++)
-            {
-                for (int j = 0; j < this.rowSize; j++)
-                {
-                    //  Console.WriteLine(this.tileList[i][j].Name);
 
                 }
             }

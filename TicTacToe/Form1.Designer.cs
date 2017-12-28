@@ -42,6 +42,8 @@ namespace TicTacToe
             this.mODEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.humanVsHumanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.humanVsComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.hardModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -90,7 +92,7 @@ namespace TicTacToe
             this.x4ToolStripMenuItem,
             this.x5ToolStripMenuItem});
             this.rOZMIARToolStripMenuItem.Name = "rOZMIARToolStripMenuItem";
-            this.rOZMIARToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.rOZMIARToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rOZMIARToolStripMenuItem.Text = "SIZE";
             // 
             // x3ToolStripMenuItem
@@ -125,7 +127,7 @@ namespace TicTacToe
             this.humanVsHumanToolStripMenuItem,
             this.humanVsComputerToolStripMenuItem});
             this.mODEToolStripMenuItem.Name = "mODEToolStripMenuItem";
-            this.mODEToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.mODEToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.mODEToolStripMenuItem.Text = "MODE";
             // 
             // humanVsHumanToolStripMenuItem
@@ -140,11 +142,29 @@ namespace TicTacToe
             // 
             // humanVsComputerToolStripMenuItem
             // 
+            this.humanVsComputerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.hardModeToolStripMenuItem});
             this.humanVsComputerToolStripMenuItem.Name = "humanVsComputerToolStripMenuItem";
             this.humanVsComputerToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.humanVsComputerToolStripMenuItem.Tag = "comp";
             this.humanVsComputerToolStripMenuItem.Text = "Human vs Computer";
-            this.humanVsComputerToolStripMenuItem.Click += new System.EventHandler(this.SwitchMode);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1.Tag = "easy";
+            this.toolStripMenuItem1.Text = "Easy mode";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.SwitchMode);
+            // 
+            // hardModeToolStripMenuItem
+            // 
+            this.hardModeToolStripMenuItem.Name = "hardModeToolStripMenuItem";
+            this.hardModeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hardModeToolStripMenuItem.Tag = "hard";
+            this.hardModeToolStripMenuItem.Text = "Hard mode";
+            this.hardModeToolStripMenuItem.Click += new System.EventHandler(this.SwitchMode);
             // 
             // menuStrip1
             // 
@@ -196,6 +216,8 @@ namespace TicTacToe
         private System.Windows.Forms.ToolStripMenuItem humanVsComputerToolStripMenuItem;
         public System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem hardModeToolStripMenuItem;
     }
 }
 

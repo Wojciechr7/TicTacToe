@@ -75,12 +75,17 @@
   <ItemGroup>
     <Compile Include="Classes\Board.cs" />
     <Compile Include="Classes\Computer.cs" />
+    <Compile Include="Classes\Easy.cs" />
     <Compile Include="Classes\Game.cs" />
+    <Compile Include="Classes\Hard.cs" />
     <Compile Include="Classes\Human.cs" />
-    <Compile Include="Interfaces\IBoard.cs" />
+    <Compile Include="Interfaces\IGame.cs" />
     <Compile Include="Interfaces\IComputer.cs" />
     <Compile Include="Interfaces\IHuman.cs" />
+    <Compile Include="Interfaces\IHard.cs" />
+    <Compile Include="Interfaces\IEasy.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
+    <Compile Include="Interfaces\IBoard.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\Tile.cs" />
     <Compile Include="Form1.cs">

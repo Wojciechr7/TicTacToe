@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace TicTacToe.classes
 {
-    class Human : Player
+    class Human : Player, IHuman
     {
         public Human(string s = "o", bool a = true, string n = "NO PLAYER NAME") : base(s, a, n)
         {

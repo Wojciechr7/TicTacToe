@@ -30,9 +30,9 @@ namespace TicTacToe.classes
             }
             set
             {
-                // allow only "o" and "x" property to set Sign
                 if (value == "o" || value == "x")
                     sign = value;
+                else throw new Exception("sign value should be 'o' or 'x'");
             }
         }
 

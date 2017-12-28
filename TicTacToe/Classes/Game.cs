@@ -9,26 +9,27 @@ using System.Windows.Forms;
 
 namespace TicTacToe.classes
 {
-    class Game
+    class Game : IGame
     {
         private int rowSize;
+
+        public Computer comp;
 
         private List<Player> players;
 
         internal List<Player> Players { get => players; set => players = value; }
 
-        public Game(int rs)
+        public Game(int rs, Computer comp)
         {
             this.rowSize = rs;
             this.players = new List<Player>();
+            this.comp = comp;
         }
 
 
 
         public void StartGame(List<PictureBox> picList, Board board, TextBox tb1, TextBox tb2)
         {
-
-            
 
             this.ClearScreen(picList);
 
@@ -49,7 +50,7 @@ namespace TicTacToe.classes
             this.players.Clear();
             this.players.Add(tb1.Text == "" ? new Human("o", true) : new Human("o", true, tb1.Text));
             this.players.Add(tb2.Text == "" ? new Human("x", false) : new Human("x", false, tb2.Text));
-            this.players.Add(new Computer("x", false, "Computer", false));
+            this.players.Add(this.comp);
         }
 
         public void UpdateList(int[] actualIndex, List<List<Tile>> tileList, string actualSign)

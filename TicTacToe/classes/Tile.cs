@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TicTacToe.classes
 {
+    // this class is used by Board method CreateList()
     class Tile
     {
         public string Sign { get; set; }

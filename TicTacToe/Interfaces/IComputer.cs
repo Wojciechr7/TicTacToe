@@ -7,8 +7,8 @@ namespace TicTacToe.classes
     {
         bool Activated { get; set; }
 
-        int chooseRandom(List<Tile> tileList, int actual);
-        void drawImage(PictureBox element);
-        void reset(string s, string n);
+        int ChooseTile(List<List<Tile>> tileList);
+        int DrawImage(List<PictureBox> picList, List<List<Tile>> tileList, int[] actualIndex);
+        void Reset(string s, bool a, string n);
     }
 }

@@ -17,7 +17,9 @@ namespace TicTacToe
         private Board board;
         private Game game;
         private bool started;
-        
+
+        private Computer compMode;
+
         private string actualName;
         private int boardSize;
 
@@ -29,14 +31,12 @@ namespace TicTacToe
 
         public Form1()
         {
-
             InitializeComponent();
             this.started = false;
             this.gameMode = 0;
 
             this.boardSize = 3;
             this.CreatePicList(this.boardSize);
-
         }
 
         // start game button event
@@ -46,7 +46,7 @@ namespace TicTacToe
             {
                 // game start field
                 this.board = new Board(this.boardSize);
-                this.game = new Game(this.boardSize);
+                this.game = new Game(this.boardSize, this.compMode);
 
                 this.game.StartGame(this.picList, this.board, this.textBox1, this.textBox2);
                 this.started = true;
@@ -58,7 +58,6 @@ namespace TicTacToe
                 this.board.UpdateState(this, this.actualName, this.game.Players[0].Sign);
 
             }
-
         }
 
         // event for clicking a tile
@@ -66,8 +65,6 @@ namespace TicTacToe
         {
             if (this.started && ValidateNames())
             {
-
-
                 int[] actualIndex = (int[])(sender as PictureBox).Tag;
 
 
@@ -106,7 +103,7 @@ namespace TicTacToe
             // random number will not be needed
             int randomNumber = this.game.Players[2].DrawImage(this.picList, this.board.TileList, actualIndex);
 
-           
+
             actualIndex = (int[])this.picList[randomNumber].Tag;
 
             this.board.UpdateState(this, this.game.Players[2].Name, this.game.Players[2].Sign);
@@ -115,11 +112,10 @@ namespace TicTacToe
             if (this.game.CheckWinner(actualIndex, this.board.TileList, this.board.ActualSign))
             {
                 this.FinishGame(this.game.Players[2].Name);
-            } else if (this.board.IsBoardFull()) FinishGame("Nobody");
+            }
+            else if (this.board.IsBoardFull()) FinishGame("Nobody");
 
             this.board.UpdateState(this, this.game.Players[this.board.ActualPlayer].Name, this.game.Players[this.board.ActualPlayer].Sign);
-
-
 
         }
         private bool ValidateNames()
@@ -136,18 +132,32 @@ namespace TicTacToe
             MessageBox.Show(name + " won game!", "Winner!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             startButton.PerformClick();
         }
-        
+
 
         private void SwitchMode(object sender, EventArgs e)
         {
-            if ((string)(sender as ToolStripMenuItem).Tag == "comp")
+            if ((string)(sender as ToolStripMenuItem).Tag == "easy")
             {
+                this.compMode = new Easy("x", false, "Computer", false);
                 startButton.PerformClick();
-                this.textBox2.Text = "Computer";
+                this.textBox2.Text = "Computer(easy)";
                 this.game.CreatePlayersList(this.textBox1, this.textBox2);
                 this.gameMode = 1;
-                this.humanVsComputerToolStripMenuItem.CheckState = CheckState.Checked;
+                this.toolStripMenuItem1.CheckState = CheckState.Checked;
+                this.hardModeToolStripMenuItem.CheckState = CheckState.Unchecked;
                 this.humanVsHumanToolStripMenuItem.CheckState = CheckState.Unchecked;
+            }
+            else if ((string)(sender as ToolStripMenuItem).Tag == "hard")
+            {
+                this.compMode = new Hard("x", false, "Computer", false);
+                startButton.PerformClick();
+                this.textBox2.Text = "Computer(hard)";
+                this.game.CreatePlayersList(this.textBox1, this.textBox2);
+                this.gameMode = 1;
+                this.toolStripMenuItem1.CheckState = CheckState.Unchecked;
+                this.hardModeToolStripMenuItem.CheckState = CheckState.Checked;
+                this.humanVsHumanToolStripMenuItem.CheckState = CheckState.Unchecked;
+
             }
             else
             {
@@ -155,7 +165,8 @@ namespace TicTacToe
                 this.textBox2.Text = "Player 2";
                 this.game.CreatePlayersList(this.textBox1, this.textBox2);
                 this.gameMode = 0;
-                this.humanVsComputerToolStripMenuItem.CheckState = CheckState.Unchecked;
+                this.toolStripMenuItem1.CheckState = CheckState.Unchecked;
+                this.hardModeToolStripMenuItem.CheckState = CheckState.Unchecked;
                 this.humanVsHumanToolStripMenuItem.CheckState = CheckState.Checked;
             }
         }
