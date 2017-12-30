@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TicTacToe.classes
+﻿namespace TicTacToe.classes
 {
     // this class is used by Board method CreateList()
     class Tile

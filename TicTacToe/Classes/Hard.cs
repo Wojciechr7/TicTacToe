@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TicTacToe.classes
 {
-    class Hard : Computer, IHard
+    class Hard : Computer, IComputerMode
     {
 
         public Hard(string s = "o", bool a = true, string n = "NO PLAYER NAME", bool act = false) : base(s, a, n)
@@ -122,7 +118,7 @@ namespace TicTacToe.classes
             }
 
 
-            return Rand(tileList);
+            return base.ChooseTile(tileList);
         }
 
     }

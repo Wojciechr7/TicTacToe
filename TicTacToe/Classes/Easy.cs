@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Collections.Generic;
 
 namespace TicTacToe.classes
 {
-    class Easy : Computer, IEasy
+    class Easy : Computer, IComputerMode
     {
 
         public Easy(string s = "o", bool a = true, string n = "NO PLAYER NAME", bool act = false) : base(s, a, n)
@@ -24,7 +19,7 @@ namespace TicTacToe.classes
 
             if (winningTile != -1) return winningTile;
 
-            return Rand(tileList);
+            return base.ChooseTile(tileList);
         }
 
 

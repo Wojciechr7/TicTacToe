@@ -2,7 +2,7 @@
 
 namespace TicTacToe.classes
 {
-    interface IHard
+    interface IComputerMode
     {
         int ChooseTile(List<List<Tile>> tileList);
     }

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TicTacToe.classes
@@ -38,11 +35,7 @@ namespace TicTacToe.classes
             return this.lastRandom;
         }
 
-        public abstract int ChooseTile(List<List<Tile>> tileList);
-
-
-        
-        protected int Rand(List<List<Tile>> tileList)
+        public virtual int ChooseTile(List<List<Tile>> tileList)
         {
             bool emptyTile = false;
             int[] array = new int[(int)Math.Pow(tileList.Count(), 2)];
@@ -65,7 +58,7 @@ namespace TicTacToe.classes
                 // find random empty tile
                 int nr = rnd.Next(0, (int)Math.Pow(tileList.Count(), 2));
                 if (array[nr] == 1) return nr;
-                else return Rand(tileList);
+                else return ChooseTile(tileList);
 
             }
             else return -1;
@@ -170,11 +163,7 @@ namespace TicTacToe.classes
                     break;
                 }
             }
-
             return -1;
         }
-
-
-
     }
 }

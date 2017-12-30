@@ -82,8 +82,7 @@
     <Compile Include="Interfaces\IGame.cs" />
     <Compile Include="Interfaces\IComputer.cs" />
     <Compile Include="Interfaces\IHuman.cs" />
-    <Compile Include="Interfaces\IHard.cs" />
-    <Compile Include="Interfaces\IEasy.cs" />
+    <Compile Include="Interfaces\IComputerMode.cs" />
     <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IBoard.cs" />
     <Compile Include="Classes\Player.cs" />
