@@ -16,12 +16,6 @@ namespace TicTacToe.classes
             this.rnd = new Random();
         }
 
-        public override void Reset(string s, bool a, string n)
-        {
-            this.Sign = s;
-            this.name = n;
-
-        }
         public override int DrawImage(List<PictureBox> picList, List<List<Tile>> tileList, int[] actualIndex)
         {
             this.lastRandom = ChooseTile(tileList);

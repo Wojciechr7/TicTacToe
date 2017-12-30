@@ -34,7 +34,6 @@ namespace TicTacToe.classes
         public string Name { get => name; set => name = value; }
 
         public abstract int DrawImage(List<PictureBox> picList, List<List<Tile>> tileList, int[] actualIndex);
-        public abstract void Reset(string s, bool a, string n);
 
 
 

@@ -10,12 +10,6 @@ namespace TicTacToe.classes
 
         }
 
-        public override void Reset(string s, bool a, string n)
-        {
-            this.Sign = s;
-            this.name = n;
-
-        }
         public override int DrawImage(List<PictureBox> picList, List<List<Tile>> tileList, int[] actualIndex)
         {
             int actualPicNumber = tileList[actualIndex[0]][actualIndex[1]].Nr;

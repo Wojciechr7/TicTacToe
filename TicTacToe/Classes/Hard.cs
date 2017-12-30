@@ -5,7 +5,7 @@ namespace TicTacToe.classes
     class Hard : Computer, IComputerMode
     {
 
-        public Hard(string s, string n, bool act = false) : base(s, n)
+        public Hard(string s, string n) : base(s, n)
         {
 
         }

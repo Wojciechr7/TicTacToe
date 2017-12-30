@@ -5,7 +5,7 @@ namespace TicTacToe.classes
     class Easy : Computer, IComputerMode
     {
 
-        public Easy(string s, string n, bool act = false) : base(s, n)
+        public Easy(string s, string n) : base(s, n)
         {
 
         }
@@ -21,8 +21,5 @@ namespace TicTacToe.classes
 
             return base.ChooseTile(tileList);
         }
-
-
-
     }
 }

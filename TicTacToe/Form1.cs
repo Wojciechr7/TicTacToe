@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TicTacToe.classes;
 
@@ -102,7 +98,6 @@ namespace TicTacToe
         {
             this.game.Players[2].Name = this.textBox2.Text;
 
-            // random number will not be needed
             int randomNumber = this.game.Players[2].DrawImage(this.picList, this.board.TileList, actualIndex);
 
 
@@ -140,7 +135,7 @@ namespace TicTacToe
         {
             if ((string)(sender as ToolStripMenuItem).Tag == "easy")
             {
-                this.compMode = new Easy("x", "Computer", false);
+                this.compMode = new Easy("x", "Computer");
                 startButton.PerformClick();
                 this.textBox2.Text = "Computer(easy)";
                 this.game.CreatePlayersList(this.textBox1, this.textBox2);
@@ -151,7 +146,7 @@ namespace TicTacToe
             }
             else if ((string)(sender as ToolStripMenuItem).Tag == "hard")
             {
-                this.compMode = new Hard("x", "Computer", false);
+                this.compMode = new Hard("x", "Computer");
                 startButton.PerformClick();
                 this.textBox2.Text = "Computer(hard)";
                 this.game.CreatePlayersList(this.textBox1, this.textBox2);
@@ -217,7 +212,6 @@ namespace TicTacToe
             this.x3ToolStripMenuItem.CheckState = CheckState.Unchecked;
 
             (sender as ToolStripMenuItem).CheckState = CheckState.Checked;
-            // 500, 606, 712
 
             int windowSize = Convert.ToInt32((sender as ToolStripMenuItem).Tag);
 
