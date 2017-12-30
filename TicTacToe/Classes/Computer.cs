@@ -7,16 +7,12 @@ namespace TicTacToe.classes
 {
     abstract class Computer : Player, IComputer
     {
-        private bool activated;
         private Random rnd;
         private int lastRandom;
 
-        public bool Activated { get => activated; set => activated = value; }
 
-        public Computer(string s = "o", bool a = true, string n = "NO PLAYER NAME", bool act = false) : base(s, a, n)
+        public Computer(string s, string n, bool act = false) : base(s, n)
         {
-
-            this.activated = act;
             this.rnd = new Random();
         }
 

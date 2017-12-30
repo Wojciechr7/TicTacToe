@@ -5,20 +5,14 @@ namespace TicTacToe.classes
 {
     class Human : Player, IHuman
     {
-        public Human(string s = "o", bool a = true, string n = "NO PLAYER NAME") : base(s, a, n)
+        public Human(string s, string n) : base(s, n)
         {
 
         }
 
-        public string ChoosePlayerSign()
-        {
-            if (this.active == true) return "o";
-            else return "x";
-        }
         public override void Reset(string s, bool a, string n)
         {
             this.Sign = s;
-            this.active = a;
             this.name = n;
 
         }

@@ -8,14 +8,12 @@ namespace TicTacToe.classes
     {
         protected string name;
         private string sign;
-        protected bool active;
         
 
 
-        public Player(string s = "o", bool a = true, string n = "NO PLAYER NAME")
+        public Player(string s, string n)
         {         
             this.Sign = s;
-            this.active = a;
             this.name = n;
         }
 
@@ -33,7 +31,7 @@ namespace TicTacToe.classes
             }
         }
 
-        internal string Name { get => name; set => name = value; }
+        public string Name { get => name; set => name = value; }
 
         public abstract int DrawImage(List<PictureBox> picList, List<List<Tile>> tileList, int[] actualIndex);
         public abstract void Reset(string s, bool a, string n);

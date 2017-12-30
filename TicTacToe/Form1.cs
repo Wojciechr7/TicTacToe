@@ -25,6 +25,7 @@ namespace TicTacToe
 
         // gameMode: 0 - human vs human  // 1 - human vs computer
         private int gameMode;
+        private int CurrentWindowSize;
 
         public List<PictureBox> picList = new List<PictureBox>();
 
@@ -37,6 +38,7 @@ namespace TicTacToe
 
             this.boardSize = 3;
             this.CreatePicList(this.boardSize);
+            this.CurrentWindowSize = 500;
         }
 
         // start game button event
@@ -129,7 +131,7 @@ namespace TicTacToe
         }
         private void FinishGame(string name)
         {
-            MessageBox.Show(name + " won game!", "Winner!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            MessageBox.Show(name + " won game!", "Game result", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             startButton.PerformClick();
         }
 
@@ -138,7 +140,7 @@ namespace TicTacToe
         {
             if ((string)(sender as ToolStripMenuItem).Tag == "easy")
             {
-                this.compMode = new Easy("x", false, "Computer", false);
+                this.compMode = new Easy("x", "Computer", false);
                 startButton.PerformClick();
                 this.textBox2.Text = "Computer(easy)";
                 this.game.CreatePlayersList(this.textBox1, this.textBox2);
@@ -149,7 +151,7 @@ namespace TicTacToe
             }
             else if ((string)(sender as ToolStripMenuItem).Tag == "hard")
             {
-                this.compMode = new Hard("x", false, "Computer", false);
+                this.compMode = new Hard("x", "Computer", false);
                 startButton.PerformClick();
                 this.textBox2.Text = "Computer(hard)";
                 this.game.CreatePlayersList(this.textBox1, this.textBox2);
@@ -207,6 +209,7 @@ namespace TicTacToe
 
         private void SwitchGameSize(object sender, EventArgs e)
         {
+
             this.boardSize = (int)Char.GetNumericValue((sender as ToolStripMenuItem).Name[1]);
 
             this.x5ToolStripMenuItem.CheckState = CheckState.Unchecked;
@@ -214,11 +217,22 @@ namespace TicTacToe
             this.x3ToolStripMenuItem.CheckState = CheckState.Unchecked;
 
             (sender as ToolStripMenuItem).CheckState = CheckState.Checked;
+            // 500, 606, 712
 
             int windowSize = Convert.ToInt32((sender as ToolStripMenuItem).Tag);
 
-            this.MinimumSize = new Size(windowSize, windowSize);
-            this.MaximumSize = new Size(windowSize, windowSize);
+            int difference = Math.Abs(windowSize - this.CurrentWindowSize) / 2;
+
+            for (int i = 0; i < difference; i++)
+            {
+                if (this.CurrentWindowSize < windowSize)
+                    this.CurrentWindowSize += 2;
+                else this.CurrentWindowSize -= 2;
+
+                this.MinimumSize = new Size(this.CurrentWindowSize, this.CurrentWindowSize);
+                this.MaximumSize = new Size(this.CurrentWindowSize, this.CurrentWindowSize);
+                Thread.Sleep(3);
+            }
 
             this.CreatePicList(this.boardSize);
             startButton.PerformClick();

@@ -44,8 +44,8 @@ namespace TicTacToe.classes
         public void CreatePlayersList(TextBox tb1, TextBox tb2)
         {
             this.players.Clear();
-            this.players.Add(tb1.Text == "" ? new Human("o", true) : new Human("o", true, tb1.Text));
-            this.players.Add(tb2.Text == "" ? new Human("x", false) : new Human("x", false, tb2.Text));
+            this.players.Add(new Human("o", tb1.Text));
+            this.players.Add(new Human("x", tb2.Text));
             this.players.Add(this.comp);
         }
 

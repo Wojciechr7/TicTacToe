@@ -50,12 +50,16 @@ namespace TicTacToe
             // 
             // startButton
             // 
+            this.startButton.BackColor = System.Drawing.Color.BlueViolet;
+            this.startButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.startButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.startButton.Location = new System.Drawing.Point(344, 29);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(128, 38);
             this.startButton.TabIndex = 9;
-            this.startButton.Text = "RESET";
-            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Text = "START";
+            this.startButton.UseVisualStyleBackColor = false;
             this.startButton.Click += new System.EventHandler(this.StartGame);
             // 
             // textBox1
@@ -92,7 +96,7 @@ namespace TicTacToe
             this.x4ToolStripMenuItem,
             this.x5ToolStripMenuItem});
             this.rOZMIARToolStripMenuItem.Name = "rOZMIARToolStripMenuItem";
-            this.rOZMIARToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rOZMIARToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.rOZMIARToolStripMenuItem.Text = "SIZE";
             // 
             // x3ToolStripMenuItem
@@ -127,7 +131,7 @@ namespace TicTacToe
             this.humanVsHumanToolStripMenuItem,
             this.humanVsComputerToolStripMenuItem});
             this.mODEToolStripMenuItem.Name = "mODEToolStripMenuItem";
-            this.mODEToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.mODEToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.mODEToolStripMenuItem.Text = "MODE";
             // 
             // humanVsHumanToolStripMenuItem
@@ -153,7 +157,7 @@ namespace TicTacToe
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
             this.toolStripMenuItem1.Tag = "easy";
             this.toolStripMenuItem1.Text = "Easy mode";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.SwitchMode);
@@ -161,7 +165,7 @@ namespace TicTacToe
             // hardModeToolStripMenuItem
             // 
             this.hardModeToolStripMenuItem.Name = "hardModeToolStripMenuItem";
-            this.hardModeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hardModeToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.hardModeToolStripMenuItem.Tag = "hard";
             this.hardModeToolStripMenuItem.Text = "Hard mode";
             this.hardModeToolStripMenuItem.Click += new System.EventHandler(this.SwitchMode);
@@ -180,12 +184,13 @@ namespace TicTacToe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(484, 462);
+            this.BackColor = System.Drawing.Color.DarkCyan;
+            this.ClientSize = new System.Drawing.Size(484, 466);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(500, 500);
